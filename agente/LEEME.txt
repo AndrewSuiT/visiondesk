@@ -1,0 +1,29 @@
+=======================================================================
+               VisionDesk PRO - Paquete de Instalacion del Agente
+               Supervision & Soporte Remoto · Manzanares S.A.C.
+=======================================================================
+
+INSTRUCCIONES DE USO:
+
+1. Descomprima todo el contenido de este archivo ZIP en cualquier carpeta.
+2. Haga clic derecho sobre "instalar_agente.bat" y seleccione 
+   "Ejecutar como administrador" (o simplemente haga doble clic).
+
+EL SCRIPT INTELIGENTE DEDUCE AUTOMATICAMENTE QUE HACER:
+- Si la estacion ya estaba instalada:
+  Actualiza los ejecutables y bibliotecas WebRTC sin modificar su clave 
+  ni su configuracion previa, y reinicia el servicio en segundo plano.
+
+- Si es una computadora nueva:
+  Copia los archivos a C:\VisionDesk y abre el asistente visual 
+  para que pueda elegir la Sucursal, Alias de la PC y Clave de acceso.
+
+Una vez finalizado, puede borrar libremente la carpeta descomprimida.
+
+CONTENIDO DEL PAQUETE:
+- instalar_agente.bat   : Script instalador / actualizador inteligente
+- VisionDeskAgent.exe   : Agente de conexion y streaming en tiempo real
+- VisionDeskSetup.exe   : Asistente visual de configuracion paso a paso
+- lib/                  : Bibliotecas de enlace WebRTC P2P Directo y TURN
+
+Soporte Tecnico: Manzanares S.A.C.

@@ -1,0 +1,40 @@
+[9/10/2026 13:05:57] UnobservedTaskException: System.AggregateException: Las excepciones de una tarea no se detectaron ni esperando a que terminara la tarea ni teniendo acceso a la propiedad Exception. Por consiguiente, el subproceso del finalizador volvió a producir la excepción no detectada. ---> System.ObjectDisposedException: No se puede obtener acceso al objeto desechado.
+Nombre del objeto: 'System.Net.WebSockets.ClientWebSocket'.
+   en System.Net.WebSockets.ClientWebSocket.ThrowIfNotConnected()
+   en VisionDesk.Agent.ScreenCapturer.<RunStreamSendLoopAsync>d__2c.MoveNext()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+---> (Nº de excepción interna 0) System.ObjectDisposedException: No se puede obtener acceso al objeto desechado.
+Nombre del objeto: 'System.Net.WebSockets.ClientWebSocket'.
+   en System.Net.WebSockets.ClientWebSocket.ThrowIfNotConnected()
+   en VisionDesk.Agent.ScreenCapturer.<RunStreamSendLoopAsync>d__2c.MoveNext()<---
+
+[9/10/2026 13:08:43] UnobservedTaskException: System.AggregateException: Las excepciones de una tarea no se detectaron ni esperando a que terminara la tarea ni teniendo acceso a la propiedad Exception. Por consiguiente, el subproceso del finalizador volvió a producir la excepción no detectada. ---> System.ObjectDisposedException: No se puede obtener acceso al objeto desechado.
+Nombre del objeto: 'System.Net.WebSockets.ClientWebSocket'.
+   en System.Net.WebSockets.ClientWebSocket.ThrowIfNotConnected()
+   en VisionDesk.Agent.ScreenCapturer.<RunStreamSendLoopAsync>d__2c.MoveNext()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+---> (Nº de excepción interna 0) System.ObjectDisposedException: No se puede obtener acceso al objeto desechado.
+Nombre del objeto: 'System.Net.WebSockets.ClientWebSocket'.
+   en System.Net.WebSockets.ClientWebSocket.ThrowIfNotConnected()
+   en VisionDesk.Agent.ScreenCapturer.<RunStreamSendLoopAsync>d__2c.MoveNext()<---
+
+[9/10/2026 13:40:28] UnobservedTaskException: System.AggregateException: Las excepciones de una tarea no se detectaron ni esperando a que terminara la tarea ni teniendo acceso a la propiedad Exception. Por consiguiente, el subproceso del finalizador volvió a producir la excepción no detectada. ---> System.ObjectDisposedException: No se puede obtener acceso al objeto desechado.
+Nombre del objeto: 'System.Net.WebSockets.ClientWebSocket'.
+   en System.Net.WebSockets.ClientWebSocket.ThrowIfNotConnected()
+   en VisionDesk.Agent.ScreenCapturer.<RunStreamSendLoopAsync>d__2c.MoveNext()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+---> (Nº de excepción interna 0) System.ObjectDisposedException: No se puede obtener acceso al objeto desechado.
+Nombre del objeto: 'System.Net.WebSockets.ClientWebSocket'.
+   en System.Net.WebSockets.ClientWebSocket.ThrowIfNotConnected()
+   en VisionDesk.Agent.ScreenCapturer.<RunStreamSendLoopAsync>d__2c.MoveNext()<---
+
+[9/10/2026 14:17:34] UnobservedTaskException: System.AggregateException: Las excepciones de una tarea no se detectaron ni esperando a que terminara la tarea ni teniendo acceso a la propiedad Exception. Por consiguiente, el subproceso del finalizador volvió a producir la excepción no detectada. ---> System.ObjectDisposedException: No se puede obtener acceso al objeto desechado.
+Nombre del objeto: 'System.Net.WebSockets.ClientWebSocket'.
+   en System.Net.WebSockets.ClientWebSocket.ThrowIfNotConnected()
+   en VisionDesk.Agent.ScreenCapturer.<RunStreamSendLoopAsync>d__2c.MoveNext()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+---> (Nº de excepción interna 0) System.ObjectDisposedException: No se puede obtener acceso al objeto desechado.
+Nombre del objeto: 'System.Net.WebSockets.ClientWebSocket'.
+   en System.Net.WebSockets.ClientWebSocket.ThrowIfNotConnected()
+   en VisionDesk.Agent.ScreenCapturer.<RunStreamSendLoopAsync>d__2c.MoveNext()<---
+

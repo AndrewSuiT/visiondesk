@@ -1,0 +1,601 @@
+[2026-10-09 13:05:42] [VisionDesk] =================================================
+[2026-10-09 13:05:42] [VisionDesk]   VisionDesk Background Agent - Windows 4.8.x   
+[2026-10-09 13:05:42] [VisionDesk] =================================================
+[2026-10-09 13:05:42] [VisionDesk] Branch ID   : cayma
+[2026-10-09 13:05:42] [VisionDesk] Alias       : AQP-CAYMA-CAJA01
+[2026-10-09 13:05:42] [VisionDesk] Machine ID  : 806 759 833 (Raw: 806759833)
+[2026-10-09 13:05:42] [VisionDesk] Server URL  : ws://127.0.0.1:8096/ws
+[2026-10-09 13:05:42] [VisionDesk] Fixed PWD   : ********
+[2026-10-09 13:05:42] [VisionDesk] Temp OTP    : 152237
+[2026-10-09 13:05:42] [VisionDesk] Target FPS  : 15 | Quality: 70%
+[2026-10-09 13:05:42] [VisionDesk] -------------------------------------------------
+[2026-10-09 13:05:42] [VisionDesk] Local Station Discovery server active on 127.0.0.1:18999
+[2026-10-09 13:05:42] [VisionDesk] Connecting to ws://127.0.0.1:8096/ws...
+[2026-10-09 13:05:42] [VisionDesk] =================================================
+[2026-10-09 13:05:42] [VisionDesk]   VisionDesk Background Agent - Windows 4.8.x   
+[2026-10-09 13:05:42] [VisionDesk] =================================================
+[2026-10-09 13:05:42] [VisionDesk] Branch ID   : cayma
+[2026-10-09 13:05:42] [VisionDesk] Alias       : AQP-CAYMA-CAJA01
+[2026-10-09 13:05:42] [VisionDesk] Machine ID  : 806 759 833 (Raw: 806759833)
+[2026-10-09 13:05:42] [VisionDesk] Server URL  : ws://127.0.0.1:8094/ws
+[2026-10-09 13:05:42] [VisionDesk] Fixed PWD   : ********
+[2026-10-09 13:05:42] [VisionDesk] Temp OTP    : 569526
+[2026-10-09 13:05:42] [VisionDesk] Target FPS  : 15 | Quality: 70%
+[2026-10-09 13:05:42] [VisionDesk] -------------------------------------------------
+[2026-10-09 13:05:42] [VisionDesk] Sent agent:register for cayma (MachineId: 806759833)
+[2026-10-09 13:05:42] [VisionDesk] Local Station Discovery server active on 127.0.0.1:18999
+[2026-10-09 13:05:42] [VisionDesk] Successfully registered with Central Server!
+[2026-10-09 13:05:42] [VisionDesk] Connecting to ws://127.0.0.1:8094/ws...
+[2026-10-09 13:05:42] [VisionDesk] Thumbnail capture loop initialized (interval: 5000 ms).
+[2026-10-09 13:05:42] [VisionDesk] WebSocket connected! Sending registration...
+[2026-10-09 13:05:42] [VisionDesk] Sent agent:register for cayma (MachineId: 806759833)
+[2026-10-09 13:05:42] [VisionDesk] >>> SESSION START REQUEST: ID=adv-flood-obs-session, Mode=observe
+[2026-10-09 13:05:42] [VisionDesk] Session adv-flood-obs-session AUTHORIZED in mode [observe]
+[2026-10-09 13:05:42] [VisionDesk] Successfully registered with Central Server!
+[2026-10-09 13:05:42] [VisionDesk] Thumbnail capture loop initialized (interval: 5000 ms).
+[2026-10-09 13:05:42] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 60332 typ host generation 0
+[2026-10-09 13:05:42] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:05:42] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 60332 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:05:42] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:05:47] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:05:47] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:05:47] [VisionDesk] >>> SESSION START REQUEST: ID=test-session-obs-m3, Mode=observe
+[2026-10-09 13:05:47] [VisionDesk] Session test-session-obs-m3 AUTHORIZED in mode [observe]
+[2026-10-09 13:05:47] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 53994 typ host generation 0
+[2026-10-09 13:05:47] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:05:47] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 53994 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:05:47] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:05:48] [VisionDesk] Agent WebRTC watchdog (6s) expired before DataChannel opened. Executing Tier 3 fallback.
+[2026-10-09 13:05:48] [VisionDesk] WebRTC fallback triggered for session adv-flood-obs-session. Conmutating seamlessly to Tier 3 WebSocket relay...
+[2026-10-09 13:05:48] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:05:48] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: adv-flood-obs-session, Mode: observe)
+[2026-10-09 13:05:48] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:05:49] [VisionDesk] <<< SESSION STOP REQUEST: ID=adv-flood-obs-session
+[2026-10-09 13:05:49] [VisionDesk] Remote controller disconnected from session.
+[2026-10-09 13:05:49] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 13:05:49] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:05:49] [VisionDesk] >>> SESSION START REQUEST: ID=adv-bypass-mode-session, Mode=observe
+[2026-10-09 13:05:49] [VisionDesk] Session adv-bypass-mode-session AUTHORIZED in mode [observe]
+[2026-10-09 13:05:49] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 53996 typ host generation 0
+[2026-10-09 13:05:49] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:05:49] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 53996 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:05:49] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:05:52] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 2 ms)
+[2026-10-09 13:05:52] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:05:53] [VisionDesk] Agent WebRTC watchdog (6s) expired before DataChannel opened. Executing Tier 3 fallback.
+[2026-10-09 13:05:53] [VisionDesk] WebRTC fallback triggered for session test-session-obs-m3. Conmutating seamlessly to Tier 3 WebSocket relay...
+[2026-10-09 13:05:53] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:05:53] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8094/ws/relay (Session: test-session-obs-m3, Mode: observe)
+[2026-10-09 13:05:53] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:05:54] [VisionDesk] <<< SESSION STOP REQUEST: ID=test-session-obs-m3
+[2026-10-09 13:05:54] [VisionDesk] Remote controller disconnected from session.
+[2026-10-09 13:05:54] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 13:05:54] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:05:54] [VisionDesk] >>> SESSION START REQUEST: ID=test-session-ctrl-m3, Mode=control
+[2026-10-09 13:05:54] [VisionDesk] Session test-session-ctrl-m3 AUTHORIZED in mode [control]
+[2026-10-09 13:05:54] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 53998 typ host generation 0
+[2026-10-09 13:05:54] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:05:54] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 53998 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:05:54] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:05:55] [VisionDesk] Agent WebRTC watchdog (6s) expired before DataChannel opened. Executing Tier 3 fallback.
+[2026-10-09 13:05:55] [VisionDesk] WebRTC fallback triggered for session adv-bypass-mode-session. Conmutating seamlessly to Tier 3 WebSocket relay...
+[2026-10-09 13:05:55] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:05:55] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: adv-bypass-mode-session, Mode: observe)
+[2026-10-09 13:05:55] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:05:56] [VisionDesk] <<< SESSION STOP REQUEST: ID=adv-bypass-mode-session
+[2026-10-09 13:05:56] [VisionDesk] Remote controller disconnected from session.
+[2026-10-09 13:05:56] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:05:56] [VisionDesk] Peer Support Auth Request: ID=auth-wrong-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:05:56] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:05:56] [VisionDesk] Peer Support Auth Request: ID=auth-empty-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:05:56] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:05:56] [VisionDesk] Peer Support Auth Request: ID=auth-sqli-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:05:56] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:05:56] [VisionDesk] Peer Support Auth Request: ID=auth-huge-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:05:56] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:05:56] [VisionDesk] Peer Support Auth Request: ID=auth-valid-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:05:56] [VisionDesk] Peer Auth GRANTED for session auth-valid-pwd in mode [control] - Initializing transports...
+[2026-10-09 13:05:56] [VisionDesk] [WebRTC] Added ICE server: stun:stun.l.google.com:19302
+[2026-10-09 13:05:56] [VisionDesk] [WebRTC] Added ICE server: stun:stun1.l.google.com:19302
+[2026-10-09 13:05:57] [VisionDesk] Sent peer:auth_response: granted=True, reason=valid_password
+[2026-10-09 13:05:57] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 54000 typ host generation 0
+[2026-10-09 13:05:57] [VisionDesk] Received message: webrtc:peer_disconnected
+[2026-10-09 13:05:57] [VisionDesk] Peer Support Auth Request: ID=12345, Requester='Unknown', Method='prompt'
+[2026-10-09 13:05:57] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 13:05:57] [VisionDesk] Peer Support Auth Request: ID=bad-types, Requester='Unknown', Method='prompt'
+[2026-10-09 13:05:57] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 13:05:57] [VisionDesk] Peer Support Auth Request: ID=bad-method, Requester='Unknown', Method='999'
+[2026-10-09 13:05:57] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 13:05:57] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:05:57] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 54000 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:05:57] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:05:57] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:05:57] [VisionDesk] >>> SESSION START REQUEST: ID=adv-boundary-ctrl-session, Mode=control
+[2026-10-09 13:05:57] [VisionDesk] Session adv-boundary-ctrl-session AUTHORIZED in mode [control]
+[2026-10-09 13:05:57] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 54000 typ host generation 0
+[2026-10-09 13:05:57] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:05:57] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 54000 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:05:57] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:06:00] [VisionDesk] Agent WebRTC watchdog (6s) expired before DataChannel opened. Executing Tier 3 fallback.
+[2026-10-09 13:06:00] [VisionDesk] WebRTC fallback triggered for session test-session-ctrl-m3. Conmutating seamlessly to Tier 3 WebSocket relay...
+[2026-10-09 13:06:00] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:06:00] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8094/ws/relay (Session: test-session-ctrl-m3, Mode: control)
+[2026-10-09 13:06:00] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:06:01] [VisionDesk] <<< SESSION STOP REQUEST: ID=test-session-ctrl-m3
+[2026-10-09 13:06:01] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:06:01] [VisionDesk] Peer Support Auth Request: ID=peer-test-valid-pwd, Requester='Contabilidad Central', Method='password'
+[2026-10-09 13:06:01] [VisionDesk] Peer Auth GRANTED for session peer-test-valid-pwd in mode [control] - Initializing transports...
+[2026-10-09 13:06:01] [VisionDesk] [WebRTC] Added ICE server: stun:stun.l.google.com:19302
+[2026-10-09 13:06:01] [VisionDesk] [WebRTC] Added ICE server: stun:stun1.l.google.com:19302
+[2026-10-09 13:06:01] [VisionDesk] Sent peer:auth_response: granted=True, reason=valid_password
+[2026-10-09 13:06:01] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 52244 typ host generation 0
+[2026-10-09 13:06:01] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 52244 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:06:01] [VisionDesk] Peer Support Auth Request: ID=peer-test-invalid-pwd, Requester='Contabilidad Central', Method='password'
+[2026-10-09 13:06:01] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:07:17] [VisionDesk] =================================================
+[2026-10-09 13:07:17] [VisionDesk]   VisionDesk Background Agent - Windows 4.8.x   
+[2026-10-09 13:07:17] [VisionDesk] =================================================
+[2026-10-09 13:07:17] [VisionDesk] Branch ID   : cayma
+[2026-10-09 13:07:17] [VisionDesk] Alias       : AQP-CAYMA-M4TEST
+[2026-10-09 13:07:17] [VisionDesk] Machine ID  : 806 759 833 (Raw: 806759833)
+[2026-10-09 13:07:17] [VisionDesk] Server URL  : ws://127.0.0.1:8098/ws
+[2026-10-09 13:07:17] [VisionDesk] Fixed PWD   : ********
+[2026-10-09 13:07:17] [VisionDesk] Temp OTP    : 778899
+[2026-10-09 13:07:17] [VisionDesk] Target FPS  : 15 | Quality: 70%
+[2026-10-09 13:07:17] [VisionDesk] -------------------------------------------------
+[2026-10-09 13:07:17] [VisionDesk] Local Station Discovery server active on 127.0.0.1:18999
+[2026-10-09 13:07:17] [VisionDesk] Connecting to ws://127.0.0.1:8098/ws...
+[2026-10-09 13:07:17] [VisionDesk] WebSocket connected! Sending registration...
+[2026-10-09 13:07:17] [VisionDesk] Sent agent:register for cayma (MachineId: 806759833)
+[2026-10-09 13:07:17] [VisionDesk] Successfully registered with Central Server!
+[2026-10-09 13:07:17] [VisionDesk] Thumbnail capture loop initialized (interval: 5000 ms).
+[2026-10-09 13:07:17] [VisionDesk] Peer Support Auth Request: ID=live-otp-sess-1791569237609, Requester='Técnico de Guardia', Method='otp'
+[2026-10-09 13:07:17] [VisionDesk] Peer Auth GRANTED for session live-otp-sess-1791569237609 in mode [control] - Initializing transports...
+[2026-10-09 13:07:17] [VisionDesk] [WebRTC] Added ICE server: stun:stun.l.google.com:19302
+[2026-10-09 13:07:17] [VisionDesk] [WebRTC] Added ICE server: stun:stun1.l.google.com:19302
+[2026-10-09 13:07:17] [VisionDesk] Sent peer:auth_response: granted=True, reason=valid_otp
+[2026-10-09 13:07:17] [VisionDesk] Peer Support Auth Request: ID=live-fixed-sess-1791569237821, Requester='Jefe de Contabilidad', Method='password'
+[2026-10-09 13:07:17] [VisionDesk] Peer Auth GRANTED for session live-fixed-sess-1791569237821 in mode [control] - Initializing transports...
+[2026-10-09 13:07:17] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 62018 typ host generation 0
+[2026-10-09 13:07:17] [VisionDesk] [WebRTC] Added ICE server: stun:stun.l.google.com:19302
+[2026-10-09 13:07:17] [VisionDesk] [WebRTC] Added ICE server: stun:stun1.l.google.com:19302
+[2026-10-09 13:07:17] [VisionDesk] Sent peer:auth_response: granted=True, reason=valid_password
+[2026-10-09 13:08:29] [VisionDesk] =================================================
+[2026-10-09 13:08:29] [VisionDesk]   VisionDesk Background Agent - Windows 4.8.x   
+[2026-10-09 13:08:29] [VisionDesk] =================================================
+[2026-10-09 13:08:29] [VisionDesk] Branch ID   : cayma
+[2026-10-09 13:08:29] [VisionDesk] Alias       : AQP-CAYMA-CAJA01
+[2026-10-09 13:08:29] [VisionDesk] Machine ID  : 806 759 833 (Raw: 806759833)
+[2026-10-09 13:08:29] [VisionDesk] Server URL  : ws://127.0.0.1:8096/ws
+[2026-10-09 13:08:29] [VisionDesk] Fixed PWD   : ********
+[2026-10-09 13:08:29] [VisionDesk] Temp OTP    : 398845
+[2026-10-09 13:08:29] [VisionDesk] Target FPS  : 15 | Quality: 70%
+[2026-10-09 13:08:29] [VisionDesk] -------------------------------------------------
+[2026-10-09 13:08:29] [VisionDesk] Local Station Discovery server active on 127.0.0.1:18999
+[2026-10-09 13:08:29] [VisionDesk] Connecting to ws://127.0.0.1:8096/ws...
+[2026-10-09 13:08:29] [VisionDesk] WebSocket connected! Sending registration...
+[2026-10-09 13:08:29] [VisionDesk] =================================================
+[2026-10-09 13:08:29] [VisionDesk]   VisionDesk Background Agent - Windows 4.8.x   
+[2026-10-09 13:08:29] [VisionDesk] =================================================
+[2026-10-09 13:08:29] [VisionDesk] Branch ID   : cayma
+[2026-10-09 13:08:29] [VisionDesk] Alias       : AQP-CAYMA-CAJA01
+[2026-10-09 13:08:29] [VisionDesk] Machine ID  : 806 759 833 (Raw: 806759833)
+[2026-10-09 13:08:29] [VisionDesk] Server URL  : ws://127.0.0.1:8094/ws
+[2026-10-09 13:08:29] [VisionDesk] Fixed PWD   : ********
+[2026-10-09 13:08:29] [VisionDesk] Temp OTP    : 716606
+[2026-10-09 13:08:29] [VisionDesk] Target FPS  : 15 | Quality: 70%
+[2026-10-09 13:08:29] [VisionDesk] -------------------------------------------------
+[2026-10-09 13:08:29] [VisionDesk] Sent agent:register for cayma (MachineId: 806759833)
+[2026-10-09 13:08:29] [VisionDesk] Local Station Discovery server active on 127.0.0.1:18999
+[2026-10-09 13:08:29] [VisionDesk] Successfully registered with Central Server!
+[2026-10-09 13:08:29] [VisionDesk] Thumbnail capture loop initialized (interval: 5000 ms).
+[2026-10-09 13:08:29] [VisionDesk] Connecting to ws://127.0.0.1:8094/ws...
+[2026-10-09 13:08:29] [VisionDesk] WebSocket connected! Sending registration...
+[2026-10-09 13:08:29] [VisionDesk] >>> SESSION START REQUEST: ID=adv-flood-obs-session, Mode=observe
+[2026-10-09 13:08:29] [VisionDesk] Session adv-flood-obs-session AUTHORIZED in mode [observe]
+[2026-10-09 13:08:29] [VisionDesk] Sent agent:register for cayma (MachineId: 806759833)
+[2026-10-09 13:08:29] [VisionDesk] Successfully registered with Central Server!
+[2026-10-09 13:08:29] [VisionDesk] Thumbnail capture loop initialized (interval: 5000 ms).
+[2026-10-09 13:08:29] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 65032 typ host generation 0
+[2026-10-09 13:08:29] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:08:29] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 65032 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:08:29] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:08:34] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:08:34] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:08:34] [VisionDesk] >>> SESSION START REQUEST: ID=test-session-obs-m3, Mode=observe
+[2026-10-09 13:08:34] [VisionDesk] Session test-session-obs-m3 AUTHORIZED in mode [observe]
+[2026-10-09 13:08:34] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 65036 typ host generation 0
+[2026-10-09 13:08:34] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:08:34] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 65036 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:08:34] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:08:35] [VisionDesk] Agent WebRTC watchdog (6s) expired before DataChannel opened. Executing Tier 3 fallback.
+[2026-10-09 13:08:35] [VisionDesk] WebRTC fallback triggered for session adv-flood-obs-session. Conmutating seamlessly to Tier 3 WebSocket relay...
+[2026-10-09 13:08:35] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:08:35] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: adv-flood-obs-session, Mode: observe)
+[2026-10-09 13:08:35] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:08:36] [VisionDesk] <<< SESSION STOP REQUEST: ID=adv-flood-obs-session
+[2026-10-09 13:08:36] [VisionDesk] Remote controller disconnected from session.
+[2026-10-09 13:08:36] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 13:08:36] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:08:36] [VisionDesk] >>> SESSION START REQUEST: ID=adv-bypass-mode-session, Mode=observe
+[2026-10-09 13:08:36] [VisionDesk] Session adv-bypass-mode-session AUTHORIZED in mode [observe]
+[2026-10-09 13:08:36] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 65038 typ host generation 0
+[2026-10-09 13:08:36] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:08:36] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 65038 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:08:36] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:08:39] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:08:39] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 2 ms)
+[2026-10-09 13:08:40] [VisionDesk] Agent WebRTC watchdog (6s) expired before DataChannel opened. Executing Tier 3 fallback.
+[2026-10-09 13:08:40] [VisionDesk] WebRTC fallback triggered for session test-session-obs-m3. Conmutating seamlessly to Tier 3 WebSocket relay...
+[2026-10-09 13:08:40] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:08:40] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8094/ws/relay (Session: test-session-obs-m3, Mode: observe)
+[2026-10-09 13:08:40] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:08:41] [VisionDesk] <<< SESSION STOP REQUEST: ID=test-session-obs-m3
+[2026-10-09 13:08:41] [VisionDesk] Remote controller disconnected from session.
+[2026-10-09 13:08:41] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 13:08:41] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:08:41] [VisionDesk] >>> SESSION START REQUEST: ID=test-session-ctrl-m3, Mode=control
+[2026-10-09 13:08:41] [VisionDesk] Session test-session-ctrl-m3 AUTHORIZED in mode [control]
+[2026-10-09 13:08:41] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 65040 typ host generation 0
+[2026-10-09 13:08:41] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:08:41] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 65040 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:08:41] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:08:42] [VisionDesk] Agent WebRTC watchdog (6s) expired before DataChannel opened. Executing Tier 3 fallback.
+[2026-10-09 13:08:42] [VisionDesk] WebRTC fallback triggered for session adv-bypass-mode-session. Conmutating seamlessly to Tier 3 WebSocket relay...
+[2026-10-09 13:08:42] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:08:42] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: adv-bypass-mode-session, Mode: observe)
+[2026-10-09 13:08:42] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:08:43] [VisionDesk] <<< SESSION STOP REQUEST: ID=adv-bypass-mode-session
+[2026-10-09 13:08:43] [VisionDesk] Remote controller disconnected from session.
+[2026-10-09 13:08:43] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:08:43] [VisionDesk] Peer Support Auth Request: ID=auth-wrong-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:08:43] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:08:43] [VisionDesk] Peer Support Auth Request: ID=auth-empty-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:08:43] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:08:43] [VisionDesk] Peer Support Auth Request: ID=auth-sqli-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:08:43] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:08:43] [VisionDesk] Peer Support Auth Request: ID=auth-huge-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:08:43] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:08:44] [VisionDesk] Peer Support Auth Request: ID=auth-valid-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:08:44] [VisionDesk] Peer Auth GRANTED for session auth-valid-pwd in mode [control] - Initializing transports...
+[2026-10-09 13:08:44] [VisionDesk] [WebRTC] Added ICE server: stun:stun.l.google.com:19302
+[2026-10-09 13:08:44] [VisionDesk] [WebRTC] Added ICE server: stun:stun1.l.google.com:19302
+[2026-10-09 13:08:44] [VisionDesk] Sent peer:auth_response: granted=True, reason=valid_password
+[2026-10-09 13:08:44] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 65042 typ host generation 0
+[2026-10-09 13:08:44] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 65042 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:08:44] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:08:44] [VisionDesk] Received message: webrtc:peer_disconnected
+[2026-10-09 13:08:44] [VisionDesk] Peer Support Auth Request: ID=12345, Requester='Unknown', Method='prompt'
+[2026-10-09 13:08:44] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 13:08:44] [VisionDesk] Peer Support Auth Request: ID=bad-types, Requester='Unknown', Method='prompt'
+[2026-10-09 13:08:44] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 13:08:44] [VisionDesk] Peer Support Auth Request: ID=bad-method, Requester='Unknown', Method='999'
+[2026-10-09 13:08:44] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 13:08:44] [VisionDesk] Heartbeat ACK | Latency RTT: 3 ms (Server: 1 ms)
+[2026-10-09 13:08:44] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:08:44] [VisionDesk] >>> SESSION START REQUEST: ID=adv-boundary-ctrl-session, Mode=control
+[2026-10-09 13:08:44] [VisionDesk] Session adv-boundary-ctrl-session AUTHORIZED in mode [control]
+[2026-10-09 13:08:44] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 65042 typ host generation 0
+[2026-10-09 13:08:44] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:08:44] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 65042 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:08:44] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:08:47] [VisionDesk] Agent WebRTC watchdog (6s) expired before DataChannel opened. Executing Tier 3 fallback.
+[2026-10-09 13:08:47] [VisionDesk] WebRTC fallback triggered for session test-session-ctrl-m3. Conmutating seamlessly to Tier 3 WebSocket relay...
+[2026-10-09 13:08:47] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:08:47] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8094/ws/relay (Session: test-session-ctrl-m3, Mode: control)
+[2026-10-09 13:08:47] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:08:48] [VisionDesk] <<< SESSION STOP REQUEST: ID=test-session-ctrl-m3
+[2026-10-09 13:08:48] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 13:08:48] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:08:48] [VisionDesk] Peer Support Auth Request: ID=peer-test-valid-pwd, Requester='Contabilidad Central', Method='password'
+[2026-10-09 13:08:48] [VisionDesk] Peer Auth GRANTED for session peer-test-valid-pwd in mode [control] - Initializing transports...
+[2026-10-09 13:08:48] [VisionDesk] [WebRTC] Added ICE server: stun:stun.l.google.com:19302
+[2026-10-09 13:08:48] [VisionDesk] [WebRTC] Added ICE server: stun:stun1.l.google.com:19302
+[2026-10-09 13:08:48] [VisionDesk] Sent peer:auth_response: granted=True, reason=valid_password
+[2026-10-09 13:08:48] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 65044 typ host generation 0
+[2026-10-09 13:08:48] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 65044 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:08:48] [VisionDesk] Peer Support Auth Request: ID=peer-test-invalid-pwd, Requester='Contabilidad Central', Method='password'
+[2026-10-09 13:08:48] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:20:57] [VisionDesk] =================================================
+[2026-10-09 13:20:57] [VisionDesk]   VisionDesk Background Agent - Windows 4.8.x   
+[2026-10-09 13:20:57] [VisionDesk] =================================================
+[2026-10-09 13:20:57] [VisionDesk] Branch ID   : cayma
+[2026-10-09 13:20:57] [VisionDesk] Alias       : AQP-CAYMA-CAJA01
+[2026-10-09 13:20:57] [VisionDesk] Machine ID  : 806 759 833 (Raw: 806759833)
+[2026-10-09 13:20:57] [VisionDesk] Server URL  : ws://127.0.0.1:8096/ws
+[2026-10-09 13:20:57] [VisionDesk] Fixed PWD   : ********
+[2026-10-09 13:20:57] [VisionDesk] Temp OTP    : 903758
+[2026-10-09 13:20:57] [VisionDesk] Target FPS  : 15 | Quality: 70%
+[2026-10-09 13:20:57] [VisionDesk] -------------------------------------------------
+[2026-10-09 13:20:57] [VisionDesk] Local Station Discovery server active on 127.0.0.1:18999
+[2026-10-09 13:20:57] [VisionDesk] Connecting to ws://127.0.0.1:8096/ws...
+[2026-10-09 13:20:57] [VisionDesk] WebSocket connected! Sending registration...
+[2026-10-09 13:20:57] [VisionDesk] Sent agent:register for cayma (MachineId: 806759833)
+[2026-10-09 13:20:57] [VisionDesk] Successfully registered with Central Server!
+[2026-10-09 13:20:57] [VisionDesk] Thumbnail capture loop initialized (interval: 5000 ms).
+[2026-10-09 13:20:57] [VisionDesk] >>> SESSION START REQUEST: ID=adv-flood-obs-session, Mode=observe
+[2026-10-09 13:20:57] [VisionDesk] Session adv-flood-obs-session AUTHORIZED in mode [observe]
+[2026-10-09 13:20:57] [VisionDesk] =================================================
+[2026-10-09 13:20:57] [VisionDesk]   VisionDesk Background Agent - Windows 4.8.x   
+[2026-10-09 13:20:57] [VisionDesk] =================================================
+[2026-10-09 13:20:57] [VisionDesk] Branch ID   : cayma
+[2026-10-09 13:20:57] [VisionDesk] Alias       : AQP-CAYMA-CAJA01
+[2026-10-09 13:20:57] [VisionDesk] Machine ID  : 806 759 833 (Raw: 806759833)
+[2026-10-09 13:20:57] [VisionDesk] Server URL  : ws://127.0.0.1:8094/ws
+[2026-10-09 13:20:57] [VisionDesk] Fixed PWD   : ********
+[2026-10-09 13:20:57] [VisionDesk] Temp OTP    : 803578
+[2026-10-09 13:20:57] [VisionDesk] Target FPS  : 15 | Quality: 70%
+[2026-10-09 13:20:57] [VisionDesk] -------------------------------------------------
+[2026-10-09 13:20:57] [VisionDesk] Local Station Discovery server active on 127.0.0.1:18999
+[2026-10-09 13:20:57] [VisionDesk] Connecting to ws://127.0.0.1:8094/ws...
+[2026-10-09 13:20:57] [VisionDesk] WebSocket connected! Sending registration...
+[2026-10-09 13:20:57] [VisionDesk] Sent agent:register for cayma (MachineId: 806759833)
+[2026-10-09 13:20:57] [VisionDesk] Successfully registered with Central Server!
+[2026-10-09 13:20:57] [VisionDesk] Thumbnail capture loop initialized (interval: 5000 ms).
+[2026-10-09 13:20:57] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 65006 typ host generation 0
+[2026-10-09 13:20:57] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:20:57] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 65006 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:20:57] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:21:02] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:21:02] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:21:02] [VisionDesk] >>> SESSION START REQUEST: ID=test-session-obs-m3, Mode=observe
+[2026-10-09 13:21:02] [VisionDesk] Session test-session-obs-m3 AUTHORIZED in mode [observe]
+[2026-10-09 13:21:03] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 50160 typ host generation 0
+[2026-10-09 13:21:03] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:21:03] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 50160 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:21:03] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:21:03] [VisionDesk] Agent WebRTC watchdog (6s) expired before DataChannel opened. Executing Tier 3 fallback.
+[2026-10-09 13:21:03] [VisionDesk] WebRTC fallback triggered for session adv-flood-obs-session. Conmutating seamlessly to Tier 3 WebSocket relay...
+[2026-10-09 13:21:03] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:21:03] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: adv-flood-obs-session, Mode: observe)
+[2026-10-09 13:21:03] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:21:04] [VisionDesk] <<< SESSION STOP REQUEST: ID=adv-flood-obs-session
+[2026-10-09 13:21:04] [VisionDesk] Remote controller disconnected from session.
+[2026-10-09 13:21:04] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 13:21:04] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:21:04] [VisionDesk] >>> SESSION START REQUEST: ID=adv-bypass-mode-session, Mode=observe
+[2026-10-09 13:21:04] [VisionDesk] Session adv-bypass-mode-session AUTHORIZED in mode [observe]
+[2026-10-09 13:21:04] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 50164 typ host generation 0
+[2026-10-09 13:21:04] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:21:04] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 50164 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:21:04] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:21:07] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:21:07] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:21:09] [VisionDesk] Agent WebRTC watchdog (6s) expired before DataChannel opened. Executing Tier 3 fallback.
+[2026-10-09 13:21:09] [VisionDesk] WebRTC fallback triggered for session test-session-obs-m3. Conmutating seamlessly to Tier 3 WebSocket relay...
+[2026-10-09 13:21:09] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:21:09] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8094/ws/relay (Session: test-session-obs-m3, Mode: observe)
+[2026-10-09 13:21:09] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:21:10] [VisionDesk] <<< SESSION STOP REQUEST: ID=test-session-obs-m3
+[2026-10-09 13:21:10] [VisionDesk] Remote controller disconnected from session.
+[2026-10-09 13:21:10] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 13:21:10] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:21:10] [VisionDesk] >>> SESSION START REQUEST: ID=test-session-ctrl-m3, Mode=control
+[2026-10-09 13:21:10] [VisionDesk] Session test-session-ctrl-m3 AUTHORIZED in mode [control]
+[2026-10-09 13:21:10] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 50166 typ host generation 0
+[2026-10-09 13:21:10] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:21:10] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 50166 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:21:10] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:21:10] [VisionDesk] Agent WebRTC watchdog (6s) expired before DataChannel opened. Executing Tier 3 fallback.
+[2026-10-09 13:21:10] [VisionDesk] WebRTC fallback triggered for session adv-bypass-mode-session. Conmutating seamlessly to Tier 3 WebSocket relay...
+[2026-10-09 13:21:10] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:21:10] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: adv-bypass-mode-session, Mode: observe)
+[2026-10-09 13:21:10] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:21:11] [VisionDesk] <<< SESSION STOP REQUEST: ID=adv-bypass-mode-session
+[2026-10-09 13:21:11] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:21:11] [VisionDesk] Peer Support Auth Request: ID=auth-wrong-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:21:11] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:21:12] [VisionDesk] Peer Support Auth Request: ID=auth-empty-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:21:12] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:21:12] [VisionDesk] Peer Support Auth Request: ID=auth-sqli-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:21:12] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:21:12] [VisionDesk] Peer Support Auth Request: ID=auth-huge-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:21:12] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:21:12] [VisionDesk] Peer Support Auth Request: ID=auth-valid-pwd, Requester='Adversary', Method='password'
+[2026-10-09 13:21:12] [VisionDesk] Peer Auth GRANTED for session auth-valid-pwd in mode [control] - Initializing transports...
+[2026-10-09 13:21:12] [VisionDesk] [WebRTC] Added ICE server: stun:stun.l.google.com:19302
+[2026-10-09 13:21:12] [VisionDesk] [WebRTC] Added ICE server: stun:stun1.l.google.com:19302
+[2026-10-09 13:21:12] [VisionDesk] Sent peer:auth_response: granted=True, reason=valid_password
+[2026-10-09 13:21:12] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 50168 typ host generation 0
+[2026-10-09 13:21:12] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 50168 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:21:12] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:21:12] [VisionDesk] Received message: webrtc:peer_disconnected
+[2026-10-09 13:21:12] [VisionDesk] Peer Support Auth Request: ID=12345, Requester='Unknown', Method='prompt'
+[2026-10-09 13:21:12] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 13:21:12] [VisionDesk] Peer Support Auth Request: ID=bad-types, Requester='Unknown', Method='prompt'
+[2026-10-09 13:21:12] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 13:21:12] [VisionDesk] Peer Support Auth Request: ID=bad-method, Requester='Unknown', Method='999'
+[2026-10-09 13:21:12] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 13:21:12] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:21:12] [VisionDesk] Heartbeat ACK | Latency RTT: 1 ms (Server: 1 ms)
+[2026-10-09 13:21:12] [VisionDesk] >>> SESSION START REQUEST: ID=adv-boundary-ctrl-session, Mode=control
+[2026-10-09 13:21:12] [VisionDesk] Session adv-boundary-ctrl-session AUTHORIZED in mode [control]
+[2026-10-09 13:21:12] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 50168 typ host generation 0
+[2026-10-09 13:21:12] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:21:13] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 50168 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:21:13] [VisionDesk] Received message: webrtc:error
+[2026-10-09 13:21:16] [VisionDesk] Agent WebRTC watchdog (6s) expired before DataChannel opened. Executing Tier 3 fallback.
+[2026-10-09 13:21:16] [VisionDesk] WebRTC fallback triggered for session test-session-ctrl-m3. Conmutating seamlessly to Tier 3 WebSocket relay...
+[2026-10-09 13:21:16] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:21:16] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8094/ws/relay (Session: test-session-ctrl-m3, Mode: control)
+[2026-10-09 13:21:16] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:21:16] [VisionDesk] <<< SESSION STOP REQUEST: ID=test-session-ctrl-m3
+[2026-10-09 13:21:16] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 13:21:16] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:21:16] [VisionDesk] Peer Support Auth Request: ID=peer-test-valid-pwd, Requester='Contabilidad Central', Method='password'
+[2026-10-09 13:21:16] [VisionDesk] Peer Auth GRANTED for session peer-test-valid-pwd in mode [control] - Initializing transports...
+[2026-10-09 13:21:16] [VisionDesk] [WebRTC] Added ICE server: stun:stun.l.google.com:19302
+[2026-10-09 13:21:16] [VisionDesk] [WebRTC] Added ICE server: stun:stun1.l.google.com:19302
+[2026-10-09 13:21:16] [VisionDesk] Sent peer:auth_response: granted=True, reason=valid_password
+[2026-10-09 13:21:16] [VisionDesk] [WebRTC] Gathered ICE candidate: [host] 1679841610 1 udp 2113937663 192.168.18.7 50170 typ host generation 0
+[2026-10-09 13:21:16] [VisionDesk] [WebRTC] Gathered ICE candidate: [srflx] 3630461116 1 udp 1677730047 181.65.207.61 50170 typ srflx raddr 0.0.0.0 rport 0 generation 0
+[2026-10-09 13:21:16] [VisionDesk] Peer Support Auth Request: ID=peer-test-invalid-pwd, Requester='Contabilidad Central', Method='password'
+[2026-10-09 13:21:16] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:40:25] [VisionDesk] =================================================
+[2026-10-09 13:40:25] [VisionDesk]   VisionDesk Background Agent - Windows 4.8.x   
+[2026-10-09 13:40:25] [VisionDesk] =================================================
+[2026-10-09 13:40:25] [VisionDesk] Branch ID   : cayma
+[2026-10-09 13:40:25] [VisionDesk] Alias       : AQP-CAYMA-CAJA01
+[2026-10-09 13:40:25] [VisionDesk] Machine ID  : 806 759 833 (Raw: 806759833)
+[2026-10-09 13:40:25] [VisionDesk] Server URL  : ws://127.0.0.1:8096/ws
+[2026-10-09 13:40:25] [VisionDesk] Fixed PWD   : ********
+[2026-10-09 13:40:25] [VisionDesk] Temp OTP    : 192825
+[2026-10-09 13:40:25] [VisionDesk] Target FPS  : 15 | Quality: 70%
+[2026-10-09 13:40:25] [VisionDesk] -------------------------------------------------
+[2026-10-09 13:40:25] [VisionDesk] Local Station Discovery server active on 127.0.0.1:18999
+[2026-10-09 13:40:25] [VisionDesk] Connecting to ws://127.0.0.1:8096/ws...
+[2026-10-09 13:40:25] [VisionDesk] WebSocket connected! Sending registration...
+[2026-10-09 13:40:25] [VisionDesk] Sent agent:register for cayma (MachineId: 806759833)
+[2026-10-09 13:40:25] [VisionDesk] Successfully registered with Central Server!
+[2026-10-09 13:40:25] [VisionDesk] Thumbnail capture loop initialized (interval: 5000 ms).
+[2026-10-09 13:40:25] [VisionDesk] =================================================
+[2026-10-09 13:40:25] [VisionDesk]   VisionDesk Background Agent - Windows 4.8.x   
+[2026-10-09 13:40:25] [VisionDesk] =================================================
+[2026-10-09 13:40:25] [VisionDesk] Branch ID   : cayma
+[2026-10-09 13:40:25] [VisionDesk] Alias       : AQP-CAYMA-CAJA01
+[2026-10-09 13:40:25] [VisionDesk] Machine ID  : 806 759 833 (Raw: 806759833)
+[2026-10-09 13:40:25] [VisionDesk] Server URL  : ws://127.0.0.1:8094/ws
+[2026-10-09 13:40:25] [VisionDesk] Fixed PWD   : ********
+[2026-10-09 13:40:25] [VisionDesk] Temp OTP    : 385099
+[2026-10-09 13:40:25] [VisionDesk] Target FPS  : 15 | Quality: 70%
+[2026-10-09 13:40:25] [VisionDesk] -------------------------------------------------
+[2026-10-09 13:40:25] [VisionDesk] Local Station Discovery server active on 127.0.0.1:18999
+[2026-10-09 13:40:25] [VisionDesk] Connecting to ws://127.0.0.1:8094/ws...
+[2026-10-09 13:40:25] [VisionDesk] >>> SESSION START REQUEST: ID=adv-flood-obs-session, Mode=observe, Transport=relay, Renegotiate=False
+[2026-10-09 13:40:25] [VisionDesk] Session adv-flood-obs-session AUTHORIZED in mode [observe]
+[2026-10-09 13:40:25] [VisionDesk] Session adv-flood-obs-session starting directly in WebSocket Relay mode (110ms / 15 FPS continuous and stable)
+[2026-10-09 13:40:25] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:40:25] [VisionDesk] WebSocket connected! Sending registration...
+[2026-10-09 13:40:25] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: adv-flood-obs-session, Mode: observe)
+[2026-10-09 13:40:25] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:40:25] [VisionDesk] Sent agent:register for cayma (MachineId: 806759833)
+[2026-10-09 13:40:25] [VisionDesk] Successfully registered with Central Server!
+[2026-10-09 13:40:25] [VisionDesk] Thumbnail capture loop initialized (interval: 5000 ms).
+[2026-10-09 13:40:26] [VisionDesk] <<< SESSION STOP REQUEST: ID=adv-flood-obs-session
+[2026-10-09 13:40:26] [VisionDesk] Remote controller disconnected from session.
+[2026-10-09 13:40:26] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 13:40:26] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:40:26] [VisionDesk] >>> SESSION START REQUEST: ID=adv-bypass-mode-session, Mode=observe, Transport=relay, Renegotiate=False
+[2026-10-09 13:40:26] [VisionDesk] Session adv-bypass-mode-session AUTHORIZED in mode [observe]
+[2026-10-09 13:40:26] [VisionDesk] Session adv-bypass-mode-session starting directly in WebSocket Relay mode (110ms / 15 FPS continuous and stable)
+[2026-10-09 13:40:26] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:40:26] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: adv-bypass-mode-session, Mode: observe)
+[2026-10-09 13:40:26] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:40:27] [VisionDesk] <<< SESSION STOP REQUEST: ID=adv-bypass-mode-session
+[2026-10-09 13:40:27] [VisionDesk] Remote controller disconnected from session.
+[2026-10-09 13:40:27] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:40:27] [VisionDesk] Peer Support Auth Request: ID=auth-wrong-pwd, Requester='Adversary', Method='password', Transport='relay'
+[2026-10-09 13:40:27] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:40:27] [VisionDesk] Peer Support Auth Request: ID=auth-empty-pwd, Requester='Adversary', Method='password', Transport='relay'
+[2026-10-09 13:40:27] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:40:27] [VisionDesk] Peer Support Auth Request: ID=auth-sqli-pwd, Requester='Adversary', Method='password', Transport='relay'
+[2026-10-09 13:40:27] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:40:27] [VisionDesk] Peer Support Auth Request: ID=auth-huge-pwd, Requester='Adversary', Method='password', Transport='relay'
+[2026-10-09 13:40:27] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 13:40:27] [VisionDesk] Peer Support Auth Request: ID=auth-valid-pwd, Requester='Adversary', Method='password', Transport='relay'
+[2026-10-09 13:40:27] [VisionDesk] Peer Auth GRANTED for session auth-valid-pwd in mode [control], Transport=relay - Initializing transports...
+[2026-10-09 13:40:27] [VisionDesk] Peer session auth-valid-pwd starting directly in WebSocket Relay mode (110ms / 15 FPS continuous)
+[2026-10-09 13:40:27] [VisionDesk] Sent peer:auth_response: granted=True, reason=valid_password
+[2026-10-09 13:40:27] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:40:27] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: auth-valid-pwd, Mode: control)
+[2026-10-09 13:40:27] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:40:28] [VisionDesk] Received message: webrtc:peer_disconnected
+[2026-10-09 13:40:28] [VisionDesk] Peer Support Auth Request: ID=12345, Requester='Unknown', Method='prompt', Transport='relay'
+[2026-10-09 13:40:28] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 13:40:28] [VisionDesk] Peer Support Auth Request: ID=bad-types, Requester='Unknown', Method='prompt', Transport='relay'
+[2026-10-09 13:40:28] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 13:40:28] [VisionDesk] Peer Support Auth Request: ID=bad-method, Requester='Unknown', Method='999', Transport='relay'
+[2026-10-09 13:40:28] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 13:40:28] [VisionDesk] >>> SESSION START REQUEST: ID=adv-boundary-ctrl-session, Mode=control, Transport=relay, Renegotiate=False
+[2026-10-09 13:40:28] [VisionDesk] Session adv-boundary-ctrl-session AUTHORIZED in mode [control]
+[2026-10-09 13:40:28] [VisionDesk] Session adv-boundary-ctrl-session starting directly in WebSocket Relay mode (110ms / 15 FPS continuous and stable)
+[2026-10-09 13:40:28] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:40:28] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: adv-boundary-ctrl-session, Mode: control)
+[2026-10-09 13:40:28] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 13:40:29] [VisionDesk] <<< SESSION STOP REQUEST: ID=adv-boundary-ctrl-session
+[2026-10-09 13:40:29] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 13:40:29] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 14:17:30] [VisionDesk] =================================================
+[2026-10-09 14:17:30] [VisionDesk]   VisionDesk Background Agent - Windows 4.8.x   
+[2026-10-09 14:17:30] [VisionDesk] =================================================
+[2026-10-09 14:17:30] [VisionDesk] Branch ID   : cayma
+[2026-10-09 14:17:30] [VisionDesk] Alias       : AQP-CAYMA-CAJA01
+[2026-10-09 14:17:30] [VisionDesk] Machine ID  : 806 759 833 (Raw: 806759833)
+[2026-10-09 14:17:30] [VisionDesk] Server URL  : ws://127.0.0.1:8096/ws
+[2026-10-09 14:17:30] [VisionDesk] Fixed PWD   : ********
+[2026-10-09 14:17:30] [VisionDesk] Temp OTP    : 115692
+[2026-10-09 14:17:30] [VisionDesk] Target FPS  : 15 | Quality: 70%
+[2026-10-09 14:17:30] [VisionDesk] -------------------------------------------------
+[2026-10-09 14:17:30] [VisionDesk] Local Station Discovery server active on 127.0.0.1:18999
+[2026-10-09 14:17:30] [VisionDesk] Connecting to ws://127.0.0.1:8096/ws...
+[2026-10-09 14:17:30] [VisionDesk] WebSocket connected! Sending registration...
+[2026-10-09 14:17:30] [VisionDesk] =================================================
+[2026-10-09 14:17:30] [VisionDesk]   VisionDesk Background Agent - Windows 4.8.x   
+[2026-10-09 14:17:30] [VisionDesk] =================================================
+[2026-10-09 14:17:30] [VisionDesk] Branch ID   : cayma
+[2026-10-09 14:17:30] [VisionDesk] Alias       : AQP-CAYMA-CAJA01
+[2026-10-09 14:17:30] [VisionDesk] Machine ID  : 806 759 833 (Raw: 806759833)
+[2026-10-09 14:17:30] [VisionDesk] Server URL  : ws://127.0.0.1:8094/ws
+[2026-10-09 14:17:30] [VisionDesk] Fixed PWD   : ********
+[2026-10-09 14:17:30] [VisionDesk] Temp OTP    : 672643
+[2026-10-09 14:17:30] [VisionDesk] Target FPS  : 15 | Quality: 70%
+[2026-10-09 14:17:30] [VisionDesk] -------------------------------------------------
+[2026-10-09 14:17:30] [VisionDesk] Sent agent:register for cayma (MachineId: 806759833)
+[2026-10-09 14:17:30] [VisionDesk] Local Station Discovery server active on 127.0.0.1:18999
+[2026-10-09 14:17:30] [VisionDesk] Successfully registered with Central Server!
+[2026-10-09 14:17:30] [VisionDesk] Thumbnail capture loop initialized (interval: 5000 ms).
+[2026-10-09 14:17:30] [VisionDesk] Connecting to ws://127.0.0.1:8094/ws...
+[2026-10-09 14:17:30] [VisionDesk] WebSocket connected! Sending registration...
+[2026-10-09 14:17:30] [VisionDesk] Sent agent:register for cayma (MachineId: 806759833)
+[2026-10-09 14:17:30] [VisionDesk] >>> SESSION START REQUEST: ID=adv-flood-obs-session, Mode=observe, Transport=relay, Renegotiate=False
+[2026-10-09 14:17:30] [VisionDesk] Successfully registered with Central Server!
+[2026-10-09 14:17:30] [VisionDesk] Thumbnail capture loop initialized (interval: 5000 ms).
+[2026-10-09 14:17:30] [VisionDesk] Session adv-flood-obs-session starting directly in WebSocket Relay mode (110ms / 15 FPS continuous and stable)
+[2026-10-09 14:17:30] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 14:17:30] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: adv-flood-obs-session, Mode: observe)
+[2026-10-09 14:17:30] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 14:17:32] [VisionDesk] <<< SESSION STOP REQUEST: ID=adv-flood-obs-session
+[2026-10-09 14:17:32] [VisionDesk] Remote controller disconnected from session.
+[2026-10-09 14:17:32] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 14:17:32] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 14:17:32] [VisionDesk] >>> SESSION START REQUEST: ID=adv-bypass-mode-session, Mode=observe, Transport=relay, Renegotiate=False
+[2026-10-09 14:17:32] [VisionDesk] Session adv-bypass-mode-session AUTHORIZED in mode [observe]
+[2026-10-09 14:17:32] [VisionDesk] Session adv-bypass-mode-session starting directly in WebSocket Relay mode (110ms / 15 FPS continuous and stable)
+[2026-10-09 14:17:32] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 14:17:32] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: adv-bypass-mode-session, Mode: observe)
+[2026-10-09 14:17:32] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 14:17:32] [VisionDesk] <<< SESSION STOP REQUEST: ID=adv-bypass-mode-session
+[2026-10-09 14:17:32] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 14:17:32] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 14:17:32] [VisionDesk] Peer Support Auth Request: ID=auth-wrong-pwd, Requester='Adversary', Method='password', Transport='relay'
+[2026-10-09 14:17:32] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 14:17:33] [VisionDesk] Peer Support Auth Request: ID=auth-empty-pwd, Requester='Adversary', Method='password', Transport='relay'
+[2026-10-09 14:17:33] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 14:17:33] [VisionDesk] Peer Support Auth Request: ID=auth-sqli-pwd, Requester='Adversary', Method='password', Transport='relay'
+[2026-10-09 14:17:33] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 14:17:33] [VisionDesk] Peer Support Auth Request: ID=auth-huge-pwd, Requester='Adversary', Method='password', Transport='relay'
+[2026-10-09 14:17:33] [VisionDesk] Sent peer:auth_response: granted=False, reason=invalid_password
+[2026-10-09 14:17:33] [VisionDesk] Peer Support Auth Request: ID=auth-valid-pwd, Requester='Adversary', Method='password', Transport='relay'
+[2026-10-09 14:17:33] [VisionDesk] Peer Auth GRANTED for session auth-valid-pwd in mode [control], Transport=relay - Initializing transports...
+[2026-10-09 14:17:33] [VisionDesk] Peer session auth-valid-pwd starting directly in WebSocket Relay mode (110ms / 15 FPS continuous)
+[2026-10-09 14:17:33] [VisionDesk] Sent peer:auth_response: granted=True, reason=valid_password
+[2026-10-09 14:17:33] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 14:17:33] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: auth-valid-pwd, Mode: control)
+[2026-10-09 14:17:33] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 14:17:33] [VisionDesk] Received message: webrtc:peer_disconnected
+[2026-10-09 14:17:33] [VisionDesk] Peer Support Auth Request: ID=12345, Requester='Unknown', Method='prompt', Transport='relay'
+[2026-10-09 14:17:33] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 14:17:33] [VisionDesk] Peer Support Auth Request: ID=bad-types, Requester='Unknown', Method='prompt', Transport='relay'
+[2026-10-09 14:17:33] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 14:17:33] [VisionDesk] Peer Support Auth Request: ID=bad-method, Requester='Unknown', Method='999', Transport='relay'
+[2026-10-09 14:17:33] [VisionDesk] Prompting user for connection authorization from 'Unknown'...
+[2026-10-09 14:17:34] [VisionDesk] >>> SESSION START REQUEST: ID=adv-boundary-ctrl-session, Mode=control, Transport=relay, Renegotiate=False
+[2026-10-09 14:17:34] [VisionDesk] Session adv-boundary-ctrl-session AUTHORIZED in mode [control]
+[2026-10-09 14:17:34] [VisionDesk] Session adv-boundary-ctrl-session starting directly in WebSocket Relay mode (110ms / 15 FPS continuous and stable)
+[2026-10-09 14:17:34] [VisionDesk] Live streaming stopped and streaming buffers disposed.
+[2026-10-09 14:17:34] [VisionDesk] Connecting to Relay Broker at: ws://127.0.0.1:8096/ws/relay (Session: adv-boundary-ctrl-session, Mode: control)
+[2026-10-09 14:17:34] [VisionDesk] Live streaming session teardown complete. Resumed passive monitoring.
+[2026-10-09 14:17:34] [VisionDesk] Connected to Relay Broker successfully. Commencing 15 FPS video pipeline...
+[2026-10-09 14:17:34] [VisionDesk] <<< SESSION STOP REQUEST: ID=adv-boundary-ctrl-session
+[2026-10-09 14:17:34] [VisionDesk] Remote controller disconnected from session.
+[2026-10-09 14:17:34] [VisionDesk] Live streaming stopped and streaming buffers disposed.
