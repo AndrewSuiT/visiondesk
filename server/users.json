@@ -1,0 +1,26 @@
+{
+  "admin": {
+    "username": "admin",
+    "password": "Manz-601$",
+    "role": "admin",
+    "plan": "pro",
+    "displayName": "Administrador Central",
+    "updatedAt": "2026-10-09T21:34:25.757Z"
+  },
+  "usuario": {
+    "username": "usuario",
+    "password": "M20120752601",
+    "role": "usuario",
+    "plan": "pro",
+    "displayName": "Usuario de Soporte",
+    "updatedAt": "2026-10-09T21:34:25.758Z"
+  },
+  "moderador": {
+    "username": "moderador",
+    "password": "Odisea_11$",
+    "role": "moderator",
+    "plan": "pro",
+    "displayName": "Moderador del Sistema",
+    "updatedAt": "2026-10-09T21:29:01.726Z"
+  }
+}

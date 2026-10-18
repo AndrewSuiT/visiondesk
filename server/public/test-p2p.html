@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VisionDesk — Test de Diagnóstico P2P y NAT (WebRTC)</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20width=%2232%22%20height=%2232%22><text y=%2226%22 font-size=%2226%22>⚡</text></svg>">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(17, 24, 39, 0.85);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --primary: #3b82f6;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 24px 16px; }
+    .container { max-width: 960px; margin: 0 auto; }
+    
+    header { text-align: center; margin-bottom: 24px; }
+    h1 { font-size: 26px; font-weight: 800; color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    p.subtitle { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; backdrop-filter: blur(10px); }
+    .card-title { font-size: 16px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: #e5e7eb; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-primary { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4); }
+    .btn-success { background: linear-gradient(135deg, #10b981, #059669); color: white; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.05); }
+
+    .tab-pills { display: flex; gap: 6px; margin-bottom: 14px; background: rgba(0,0,0,0.3); padding: 4px; border-radius: 8px; }
+    .tab-pill { flex: 1; padding: 8px 12px; border: none; background: transparent; color: var(--muted); font-size: 12px; font-weight: 600; border-radius: 6px; cursor: pointer; text-align: center; }
+    .tab-pill.active { background: var(--primary); color: white; }
+
+    .room-bar { display: flex; gap: 8px; margin-bottom: 12px; }
+    .room-input { flex: 1; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px; color: #fff; font-size: 14px; font-family: monospace; outline: none; }
+    .room-input:focus { border-color: var(--primary); }
+
+    .textarea-code { width: 100%; height: 60px; background: rgba(0, 0, 0, 0.45); border: 1px solid var(--border); border-radius: 8px; padding: 8px; color: #34d399; font-family: monospace; font-size: 11px; resize: none; margin-top: 6px; }
+
+    .hud-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+    .metric-box { background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
+    .metric-val { font-size: 20px; font-weight: 800; font-family: monospace; margin-top: 2px; }
+    .metric-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .log-box { background: #050811; border: 1px solid var(--border); border-radius: 8px; padding: 10px; font-family: monospace; font-size: 11px; color: #9ca3af; height: 130px; overflow-y: auto; line-height: 1.5; margin-top: 12px; }
+    .log-item { margin-bottom: 3px; word-break: break-all; }
+    .log-item.success { color: #34d399; }
+    .log-item.info { color: #60a5fa; }
+    .log-item.warning { color: #fbbf24; }
+    .log-item.error { color: #f87171; }
+
+    .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+    .badge-disconnected { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-connecting { background: rgba(245, 158, 11, 0.15); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-p2p { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
+
+    .interactive-canvas-box { margin-top: 18px; background: rgba(0, 0, 0, 0.4); border: 1px dashed var(--border); border-radius: 10px; padding: 12px; text-align: center; }
+    #test-canvas { background: #030712; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; cursor: crosshair; display: block; margin: 10px auto 0 auto; max-width: 100%; }
+
+    .info-callout { background: rgba(59, 130, 246, 0.08); border-left: 4px solid var(--primary); padding: 12px 14px; border-radius: 0 8px 8px 0; font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-top: 14px; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1><span>⚡</span> VisionDesk — Laboratorio WebRTC P2P</h1>
+      <p class="subtitle">Diagnóstico de apertura UDP (Hogar ⇄ Oficina) y prueba de enlace directo con latencia en tiempo real.</p>
+    </header>
+
+    <div class="grid-2">
+      <!-- PANEL 1: AUTODIAGNÓSTICO LOCAL NAT / STUN -->
+      <div class="card">
+        <h2 class="card-title"><span>🔍</span> 1. Diagnóstico NAT de este Equipo</h2>
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">
+          Consulta en tiempo real a los servidores STUN de Google para detectar tu IP pública y el tipo de mapeo UDP de tu módem.
+        </p>
+
+        <button type="button" id="btn-run-stun-test" class="btn btn-outline" style="width: 100%;">
+          <span>📡 Volver a Ejecutar Prueba STUN</span>
+        </button>
+
+        <div class="hud-metrics" style="grid-template-columns: 1fr 1fr; margin-top: 12px;">
+          <div class="metric-box">
+            <div class="metric-lbl">IP Pública Descubierta</div>
+            <div class="metric-val" id="nat-ip" style="font-size: 13px; color: #60a5fa;">---.---.---.---</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-lbl">Puerto UDP del Módem</div>
+            <div class="metric-val" id="nat-port" style="font-size: 13px; color: #a7f3d0;">-----</div>
+          </div>
+        </div>
+
+        <div class="metric-box" style="margin-top: 10px; text-align: left; padding: 10px 14px;">
+          <div class="metric-lbl">Diagnóstico de Compatibilidad P2P:</div>
+          <div id="nat-verdict" style="font-size: 12px; font-weight: 700; margin-top: 4px; color: var(--muted);">Analizando...</div>
+        </div>
+
+        <div class="log-box" id="stun-logs">
+          <div class="log-item info">[Iniciando...] Analizando candidatos STUN...</div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: CONEXIÓN EN VIVO P2P (OFICINA <-> CASA) -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 12px;">
+          <h2 class="card-title" style="border: none; padding: 0; margin: 0;"><span>🚀</span> 2. Prueba P2P en Vivo</h2>
+          <span id="conn-badge" class="status-badge badge-disconnected">Desconectado</span>
+        </div>
+
+        <!-- Pestañas de Conexión: Automática vs Manual -->
+        <div class="tab-pills">
+          <button type="button" class="tab-pill active" id="pill-mode-auto" onclick="switchMode('auto')">📡 Automático (Sala WS)</button>
+          <button type="button" class="tab-pill" id="pill-mode-manual" onclick="switchMode('manual')">📋 Manual (1-Clic Códigos)</button>
+        </div>
+
+        <!-- MODO A: AUTOMÁTICO VÍA WEBSOCKET -->
+        <div id="view-mode-auto">
+          <p style="font-size: 11px; color: var(--muted); margin-bottom: 10px;">
+            Mismo código de sala en ambas computadoras y pulse <strong>Conectar</strong>:
+          </p>
+          <div class="room-bar">
+            <input type="text" id="room-code-input" class="room-input" value="prueba-777" placeholder="Código de Sala">
+            <button type="button" id="btn-join-room" class="btn btn-primary">
+              <span>Conectar Sala</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- MODO B: MANUAL 1-CLIC (100% INDEPENDIENTE DEL SERVIDOR) -->
+        <div id="view-mode-manual" style="display: none;">
+          <p style="font-size: 11px; color: var(--muted); margin-bottom: 8px;">
+            Intercambio directo de señal WebRTC (funciona aunque el contenedor no esté actualizado):
+          </p>
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <button type="button" id="btn-manual-create-offer" class="btn btn-outline" style="flex: 1; font-size: 11px;">
+              <span>1️⃣ Crear Invitación</span>
+            </button>
+            <button type="button" id="btn-manual-accept-offer" class="btn btn-success" style="flex: 1; font-size: 11px;">
+              <span>2️⃣ Responder / Conectar</span>
+            </button>
+          </div>
+          <textarea id="manual-sdp-box" class="textarea-code" placeholder="Aquí aparecerá el código de invitación o pegue el código del otro equipo..."></textarea>
+        </div>
+
+        <!-- HUD DE TELEMETRÍA EN VIVO -->
+        <div class="hud-metrics">
+          <div class="metric-box">
+            <div class="metric-lbl">Ping P2P en Vivo</div>
+            <div class="metric-val" id="metric-ping" style="color: #6ee7b7;">-- ms</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-lbl">Tipo de Enlace</div>
+            <div class="metric-val" id="metric-type" style="font-size: 12px; color: #93c5fd;">Esperando</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-lbl">Paquetes RTT</div>
+            <div class="metric-val" id="metric-packets" style="font-size: 14px;">0</div>
+          </div>
+        </div>
+
+        <div class="log-box" id="p2p-logs">
+          <div class="log-item info">[Listo] Seleccione modo Automático o Manual para conectar.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: LIENZO INTERACTIVO DE ACCIÓN Y RESPUESTA (MOUSE Y FPS) -->
+    <div class="card" style="margin-top: 18px;">
+      <h2 class="card-title"><span>🎯</span> 3. Prueba de Movimiento e Inyección de Mouse a 0 ms</h2>
+      <p style="font-size: 12px; color: var(--muted);">
+        Al mover el mouse dentro del recuadro inferior, los eventos viajan directamente por <strong>UDP Peer-to-Peer</strong> a la otra computadora. Observa cómo el puntero se replica en tiempo real sin el retraso de Canadá:
+      </p>
+
+      <div class="interactive-canvas-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 640px; margin: 0 auto; font-size: 12px; color: var(--muted);">
+          <span>Mueva el mouse aquí para probar fluidez:</span>
+          <span>Coordenadas remotas: <strong id="canvas-coords" style="color: #fff; font-family: monospace;">(0, 0)</strong></span>
+        </div>
+        <canvas id="test-canvas" width="640" height="240"></canvas>
+      </div>
+
+      <div class="info-callout">
+        💡 <strong>Tus resultados confirman:</strong> Tanto tu oficina (<code>179.7.180.45</code>) como tu casa (<code>181.65.207.61</code>) tienen <strong>Módems Permeables con Cone NAT</strong>. Esto certifica que un enlace directo P2P UDP es 100% posible entre ambas ubicaciones sin ningún tipo de bloqueo.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    'use strict';
+
+    // 1. DOM Elements
+    const btnStunTest = document.getElementById('btn-run-stun-test');
+    const natIpEl = document.getElementById('nat-ip');
+    const natPortEl = document.getElementById('nat-port');
+    const natVerdictEl = document.getElementById('nat-verdict');
+    const stunLogs = document.getElementById('stun-logs');
+
+    const pillModeAuto = document.getElementById('pill-mode-auto');
+    const pillModeManual = document.getElementById('pill-mode-manual');
+    const viewModeAuto = document.getElementById('view-mode-auto');
+    const viewModeManual = document.getElementById('view-mode-manual');
+
+    const btnJoinRoom = document.getElementById('btn-join-room');
+    const roomInput = document.getElementById('room-code-input');
+    const connBadge = document.getElementById('conn-badge');
+    const metricPing = document.getElementById('metric-ping');
+    const metricType = document.getElementById('metric-type');
+    const metricPackets = document.getElementById('metric-packets');
+    const p2pLogs = document.getElementById('p2p-logs');
+
+    const btnManualOffer = document.getElementById('btn-manual-create-offer');
+    const btnManualAnswer = document.getElementById('btn-manual-accept-offer');
+    const manualBox = document.getElementById('manual-sdp-box');
+
+    const canvas = document.getElementById('test-canvas');
+    const ctx = canvas.getContext('2d');
+    const coordsEl = document.getElementById('canvas-coords');
+
+    function log(container, text, type = 'info') {
+      const el = document.createElement('div');
+      el.className = `log-item ${type}`;
+      const time = new Date().toLocaleTimeString();
+      el.textContent = `[${time}] ${text}`;
+      container.appendChild(el);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    window.switchMode = function(mode) {
+      if (mode === 'auto') {
+        pillModeAuto.classList.add('active');
+        pillModeManual.classList.remove('active');
+        viewModeAuto.style.display = 'block';
+        viewModeManual.style.display = 'none';
+      } else {
+        pillModeAuto.classList.remove('active');
+        pillModeManual.classList.add('active');
+        viewModeAuto.style.display = 'none';
+        viewModeManual.style.display = 'block';
+      }
+    };
+
+    function setBadge(state, text) {
+      connBadge.className = `status-badge badge-${state}`;
+      connBadge.textContent = text;
+    }
+
+    // =========================================================================
+    // 2. STUN & NAT Traversal Diagnostic Engine
+    // =========================================================================
+    btnStunTest.addEventListener('click', async () => {
+      btnStunTest.disabled = true;
+      stunLogs.innerHTML = '';
+      log(stunLogs, 'Iniciando recopilación de candidatos ICE con STUN de Google...', 'info');
+      natVerdictEl.textContent = 'Analizando apertura UDP...';
+      natVerdictEl.style.color = 'var(--warning)';
+
+      const startTime = performance.now();
+      const config = {
+        iceServers: [
+          { urls: 'stun:stun.l.google.com:19302' },
+          { urls: 'stun:stun1.l.google.com:19302' }
+        ]
+      };
+
+      try {
+        const pc = new RTCPeerConnection(config);
+        pc.createDataChannel('stun-test');
+
+        let srflxFound = false;
+
+        pc.onicecandidate = (e) => {
+          if (!e.candidate) {
+            const elapsed = Math.round(performance.now() - startTime);
+            if (srflxFound) {
+              log(stunLogs, `Recopilación completada en ${elapsed} ms. NAT compatible detectado.`, 'success');
+              natVerdictEl.textContent = '✅ MÓDEM PERMEABLE: Permite P2P Directo (Cone NAT / STUN OK)';
+              natVerdictEl.style.color = 'var(--success)';
+            } else {
+              log(stunLogs, 'No se recibió candidato srflx público. Posible red simétrica o bloqueo UDP.', 'warning');
+              natVerdictEl.textContent = '⚠️ POSIBLE CGNAT / UDP RESTRINGIDO (Requiere Fallback a Relay)';
+              natVerdictEl.style.color = 'var(--warning)';
+            }
+            btnStunTest.disabled = false;
+            pc.close();
+            return;
+          }
+
+          const c = e.candidate;
+          log(stunLogs, `Candidato [${c.type}] ${c.protocol.toUpperCase()} ${c.address}:${c.port}`, 'info');
+
+          if (c.type === 'srflx') {
+            srflxFound = true;
+            natIpEl.textContent = c.address;
+            natPortEl.textContent = c.port;
+          }
+        };
+
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+      } catch (err) {
+        log(stunLogs, 'Error ejecutando prueba STUN: ' + err.message, 'error');
+        btnStunTest.disabled = false;
+      }
+    });
+
+    // =========================================================================
+    // 3. WebRTC Core Engine (DataChannel + Ping Loop + Inspection)
+    // =========================================================================
+    let ws = null;
+    let peerConn = null;
+    let dataChannel = null;
+    let pingInterval = null;
+    let packetCount = 0;
+    let isInitiator = false;
+
+    const rtcConfig = {
+      iceServers: [
+        { urls: 'stun:stun.l.google.com:19302' },
+        { urls: 'stun:stun1.l.google.com:19302' }
+      ]
+    };
+
+    function createPeerConnection(isOfferSide) {
+      if (peerConn) {
+        try { peerConn.close(); } catch (_) {}
+      }
+      peerConn = new RTCPeerConnection(rtcConfig);
+
+      peerConn.onicecandidate = (e) => {
+        if (e.candidate) {
+          if (ws && ws.readyState === WebSocket.OPEN) {
+            sendSignal({ type: 'candidate', candidate: e.candidate });
+          }
+        }
+      };
+
+      peerConn.oniceconnectionstatechange = () => {
+        log(p2pLogs, `Estado ICE: ${peerConn.iceConnectionState}`, 'info');
+        if (peerConn.iceConnectionState === 'connected' || peerConn.iceConnectionState === 'completed') {
+          setBadge('p2p', '🟢 P2P Directo Activo');
+          log(p2pLogs, '¡TÚNEL P2P UDP ABIERTO CON ÉXITO! La conexión viaja directamente sin servidores intermediarios.', 'success');
+          inspectActiveConnection();
+        } else if (peerConn.iceConnectionState === 'failed') {
+          setBadge('disconnected', 'Fallo ICE P2P');
+          log(p2pLogs, 'Fallo de enlace directo P2P. Aquí entraría el Fallback automático.', 'error');
+        }
+      };
+
+      if (isOfferSide) {
+        dataChannel = peerConn.createDataChannel('visiondesk-p2p', { ordered: false });
+        setupDataChannel(dataChannel);
+      } else {
+        peerConn.ondatachannel = (e) => {
+          dataChannel = e.channel;
+          setupDataChannel(dataChannel);
+        };
+      }
+      return peerConn;
+    }
+
+    function setupDataChannel(dc) {
+      dc.onopen = () => {
+        log(p2pLogs, 'Canal de datos P2P abierto. Iniciando telemetría de ping...', 'success');
+        startLatencyPingLoop();
+      };
+
+      dc.onmessage = (e) => {
+        packetCount++;
+        metricPackets.textContent = packetCount;
+
+        try {
+          const data = JSON.parse(e.data);
+          if (data.type === 'ping') {
+            dc.send(JSON.stringify({ type: 'pong', time: data.time }));
+          } else if (data.type === 'pong') {
+            const rtt = Math.round(performance.now() - data.time);
+            metricPing.textContent = `${rtt} ms`;
+            metricPing.style.color = (rtt < 35) ? '#34d399' : (rtt < 80 ? '#60a5fa' : '#f87171');
+          } else if (data.type === 'mouse') {
+            drawRemoteCursor(data.x, data.y);
+          }
+        } catch (_) {}
+      };
+    }
+
+    function startLatencyPingLoop() {
+      clearInterval(pingInterval);
+      pingInterval = setInterval(() => {
+        if (dataChannel && dataChannel.readyState === 'open') {
+          dataChannel.send(JSON.stringify({ type: 'ping', time: performance.now() }));
+        }
+      }, 350);
+    }
+
+    async function inspectActiveConnection() {
+      if (!peerConn) return;
+      try {
+        const stats = await peerConn.getStats();
+        stats.forEach((report) => {
+          if (report.type === 'candidate-pair' && report.state === 'succeeded') {
+            const local = stats.get(report.localCandidateId);
+            const remote = stats.get(report.remoteCandidateId);
+            if (local && remote) {
+              const pairText = `${local.candidateType} ➔ ${remote.candidateType}`;
+              metricType.textContent = pairText.toUpperCase();
+              log(p2pLogs, `Par ICE Activo: [${pairText.toUpperCase()}] Protocolo: ${local.protocol.toUpperCase()}`, 'success');
+            }
+          }
+        });
+      } catch (_) {}
+    }
+
+    // =========================================================================
+    // 4. MODO A: Señalización Automática por WebSocket
+    // =========================================================================
+    btnJoinRoom.addEventListener('click', () => {
+      const room = roomInput.value.trim();
+      if (!room) return alert('Ingrese un nombre de sala');
+      initP2PSession(room);
+    });
+
+    function initP2PSession(roomId) {
+      if (ws) try { ws.close(); } catch (_) {}
+      clearInterval(pingInterval);
+      packetCount = 0;
+
+      setBadge('connecting', 'Conectando al servidor...');
+      log(p2pLogs, `Conectando al señalizador central para la sala "${roomId}"...`, 'info');
+
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const wsUrl = `${protocol}//${window.location.host}/ws`;
+
+      ws = new WebSocket(wsUrl);
+
+      ws.onopen = () => {
+        log(p2pLogs, 'Conectado al señalizador. Uniéndose a la sala...', 'info');
+        ws.send(JSON.stringify({ type: 'p2p:join', roomId: roomId }));
+      };
+
+      ws.onmessage = async (evt) => {
+        try {
+          const msg = JSON.parse(evt.data);
+          handleSignalMessage(msg);
+        } catch (_) {}
+      };
+
+      ws.onclose = () => {
+        log(p2pLogs, 'Desconectado del señalizador central.', 'warning');
+      };
+    }
+
+    async function handleSignalMessage(msg) {
+      switch (msg.type) {
+        case 'p2p:joined':
+          isInitiator = msg.isInitiator;
+          log(p2pLogs, `Unido a la sala. Eres el par ${isInitiator ? 'iniciador' : 'receptor'}. Pares en sala: ${msg.peersCount}`, 'info');
+          if (msg.peersCount > 1 && isInitiator) {
+            startWebRTCOffer();
+          }
+          break;
+
+        case 'p2p:peer_joined':
+          log(p2pLogs, '¡El otro equipo ha entrado a la sala! Iniciando negociación P2P...', 'success');
+          if (isInitiator) {
+            startWebRTCOffer();
+          }
+          break;
+
+        case 'p2p:peer_left':
+          log(p2pLogs, 'El otro par ha salido de la sala.', 'warning');
+          setBadge('disconnected', 'Par desconectado');
+          metricPing.textContent = '-- ms';
+          break;
+
+        case 'p2p:signal':
+          await handleRemoteSignal(msg.signal);
+          break;
+      }
+    }
+
+    async function startWebRTCOffer() {
+      createPeerConnection(true);
+      const offer = await peerConn.createOffer();
+      await peerConn.setLocalDescription(offer);
+      sendSignal({ type: 'offer', sdp: offer });
+    }
+
+    async function handleRemoteSignal(signal) {
+      if (!peerConn) createPeerConnection(false);
+
+      if (signal.type === 'offer') {
+        await peerConn.setRemoteDescription(new RTCSessionDescription(signal.sdp));
+        const answer = await peerConn.createAnswer();
+        await peerConn.setLocalDescription(answer);
+        sendSignal({ type: 'answer', sdp: answer });
+      } else if (signal.type === 'answer') {
+        await peerConn.setRemoteDescription(new RTCSessionDescription(signal.sdp));
+      } else if (signal.type === 'candidate' && signal.candidate) {
+        try {
+          await peerConn.addIceCandidate(new RTCIceCandidate(signal.candidate));
+        } catch (_) {}
+      }
+    }
+
+    function sendSignal(data) {
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ type: 'p2p:signal', signal: data }));
+      }
+    }
+
+    // =========================================================================
+    // 5. MODO B: Manual 1-Clic Códigos (Cero Servidor - 100% Directo)
+    // =========================================================================
+    btnManualOffer.addEventListener('click', async () => {
+      createPeerConnection(true);
+      log(p2pLogs, 'Generando oferta e ICE candidates (esperando 1s)...', 'info');
+      setBadge('connecting', 'Generando Invitación...');
+
+      const candidates = [];
+      peerConn.onicecandidate = (e) => {
+        if (e.candidate) candidates.push(e.candidate);
+      };
+
+      const offer = await peerConn.createOffer();
+      await peerConn.setLocalDescription(offer);
+
+      setTimeout(() => {
+        const payload = { sdp: peerConn.localDescription, candidates };
+        const code = btoa(JSON.stringify(payload));
+        manualBox.value = code;
+        manualBox.select();
+        document.execCommand('copy');
+        log(p2pLogs, '📋 ¡Invitación generada y copiada al portapapeles! Péguela en el otro equipo y haga clic en "2️⃣ Responder".', 'success');
+        setBadge('connecting', 'Esperando Respuesta...');
+      }, 1200);
+    });
+
+    btnManualAnswer.addEventListener('click', async () => {
+      const input = manualBox.value.trim();
+      if (!input) return alert('Pegue el código de invitación o respuesta en la caja de texto.');
+
+      let data;
+      try {
+        data = JSON.parse(atob(input));
+      } catch (e) {
+        return alert('Código inválido. Asegúrese de copiar el texto completo.');
+      }
+
+      if (data.sdp && data.sdp.type === 'offer') {
+        createPeerConnection(false);
+        const candidates = [];
+        peerConn.onicecandidate = (e) => {
+          if (e.candidate) candidates.push(e.candidate);
+        };
+
+        await peerConn.setRemoteDescription(new RTCSessionDescription(data.sdp));
+        if (data.candidates) {
+          for (const c of data.candidates) {
+            try { await peerConn.addIceCandidate(new RTCIceCandidate(c)); } catch (_) {}
+          }
+        }
+
+        const answer = await peerConn.createAnswer();
+        await peerConn.setLocalDescription(answer);
+
+        setTimeout(() => {
+          const payload = { sdp: peerConn.localDescription, candidates };
+          const code = btoa(JSON.stringify(payload));
+          manualBox.value = code;
+          manualBox.select();
+          document.execCommand('copy');
+          log(p2pLogs, '📋 ¡Respuesta generada y copiada! Péguela en el primer equipo para cerrar el enlace P2P.', 'success');
+          setBadge('connecting', 'Respuesta Lista');
+        }, 1200);
+      } else if (data.sdp && data.sdp.type === 'answer') {
+        if (!peerConn) return alert('No hay sesión iniciada en este equipo.');
+        await peerConn.setRemoteDescription(new RTCSessionDescription(data.sdp));
+        if (data.candidates) {
+          for (const c of data.candidates) {
+            try { await peerConn.addIceCandidate(new RTCIceCandidate(c)); } catch (_) {}
+          }
+        }
+        log(p2pLogs, 'Respuesta aplicada con éxito. Estableciendo túnel P2P directo...', 'success');
+      }
+    });
+
+    // =========================================================================
+    // 6. Interactive Zero-Lag Motion Canvas
+    // =========================================================================
+    let remoteX = 0, remoteY = 0;
+
+    function renderCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < canvas.width; x += 40) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+      }
+      for (let y = 0; y < canvas.height; y += 40) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+      }
+
+      if (remoteX > 0 && remoteY > 0) {
+        ctx.beginPath();
+        ctx.arc(remoteX, remoteY, 12, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.35)';
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#10b981';
+        ctx.stroke();
+
+        ctx.fillStyle = '#6ee7b7';
+        ctx.font = '10px monospace';
+        ctx.fillText(`P2P Remoto (${remoteX}, ${remoteY})`, remoteX + 16, remoteY + 4);
+      }
+
+      requestAnimationFrame(renderCanvas);
+    }
+    renderCanvas();
+
+    function drawRemoteCursor(x, y) {
+      remoteX = x;
+      remoteY = y;
+      coordsEl.textContent = `(${x}, ${y})`;
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = Math.round(e.clientX - rect.left);
+      const y = Math.round(e.clientY - rect.top);
+
+      if (dataChannel && dataChannel.readyState === 'open') {
+        dataChannel.send(JSON.stringify({ type: 'mouse', x, y }));
+      }
+    });
+
+    // Auto-run STUN diagnostic on load
+    setTimeout(() => {
+      btnStunTest.click();
+    }, 400);
+  </script>
+</body>
+</html>

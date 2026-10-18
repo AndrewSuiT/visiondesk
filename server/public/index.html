@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="VisionDesk - Sistema Centralizado de Monitoreo y Control Remoto de Sucursales Arequipa">
+  <title>VisionDesk — Panel Central de Sucursales</title>
+  <meta name="theme-color" content="#111827">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="VisionDesk">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/style.css?v=3.5.0">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233b82f6'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/></svg>">
+</head>
+<body class="dashboard-body">
+
+  <!-- ================================================================= -->
+  <!-- 1. Offline / Reconnection Banner -->
+  <!-- ================================================================= -->
+  <aside id="network-banner" class="network-banner hidden" role="alert" aria-live="assertive">
+    <div class="banner-content">
+      <span class="banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>
+      <span id="network-banner-msg">Conexión con el servidor central interrumpida. Intentando reconectar...</span>
+      <button id="banner-reconnect-btn" class="btn btn-xs btn-outline">Reintentar Ahora</button>
+    </div>
+  </aside>
+
+  <!-- ================================================================= -->
+  <!-- 2. Application Header, Navigation Tabs & Real-time HUD -->
+  <!-- ================================================================= -->
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="brand-logo">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+      </div>
+      <div class="brand-info">
+        <h1 class="brand-title">VisionDesk <span class="brand-badge">PRO</span></h1>
+        <p class="brand-subtitle">Supervisión & Soporte Remoto · Manzanares S.A.C.</p>
+      </div>
+    </div>
+
+    <!-- Pestañas de Navegación Principal -->
+    <nav class="app-nav-tabs" aria-label="Navegación principal">
+      <button id="tab-btn-support" class="nav-tab-btn active" data-tab="support" title="Soporte Punto a Punto por ID y Contraseña">
+        <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+        <span class="tab-text">Soporte Punto a Punto</span>
+      </button>
+      <button id="tab-btn-supervision" class="nav-tab-btn" data-tab="supervision" style="display: none;" title="Supervisión Central de Sucursales con miniaturas en vivo">
+        <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span class="tab-text">Supervisión Central</span>
+        <span class="tab-badge" id="tab-supervision-badge">0</span>
+      </button>
+      <button id="tab-btn-moderator" class="nav-tab-btn" data-tab="moderator" style="display: none;" title="Panel de Moderador: Gestionar Planes (VIP / FREE) y Contraseñas">
+        <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span class="tab-text">Panel Moderador</span>
+      </button>
+    </nav>
+
+    <!-- Central Global Telemetry HUD -->
+    <div class="header-hud">
+      <div class="hud-item" title="Estado de la red de sucursales">
+        <span class="hud-label">ESTACIONES:</span>
+        <span id="hud-online-count" class="hud-value"><span class="count-online">0</span> En Línea</span>
+      </div>
+      <div class="hud-divider"></div>
+      <div class="hud-item" title="Consumo de RAM en servidor Ubuntu (Límite 30 MB)">
+        <span class="hud-label">RAM VPS:</span>
+        <span id="hud-server-ram" class="hud-value">-- MB <small>/ 30 MB</small></span>
+      </div>
+      <div class="hud-divider"></div>
+      <div class="hud-item" title="Enlace de señalización WebSocket">
+        <span class="hud-label">WS RELAY:</span>
+        <span id="hud-ws-status" class="hud-pill pill-connecting">Conectando...</span>
+      </div>
+    </div>
+
+    <!-- Quick Tools / Global Actions -->
+    <div class="header-actions">
+      <div class="admin-user-menu-wrapper" id="admin-user-menu-wrapper" style="position: relative;">
+        <button id="btn-admin-auth" class="btn btn-sm btn-outline" title="Iniciar o gestionar sesión">
+          <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span id="admin-auth-text">Iniciar Sesión</span>
+        </button>
+        <div id="admin-dropdown-menu" class="admin-dropdown-menu hidden" style="position: absolute; right: 0; top: 110%; z-index: 1000; min-width: 180px; background: #1f2937; border: 1px solid #374151; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); overflow: hidden;">
+                    <button type="button" id="btn-open-moderator-panel" class="admin-dropdown-item hidden" style="width: 100%; display: none; align-items: center; gap: 8px; padding: 10px 14px; background: none; border: none; color: #60a5fa; font-size: 13px; text-align: left; cursor: pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>Gestionar Cuentas & Planes</span>
+          </button>
+          <div id="admin-dropdown-mod-divider" style="display: none; height: 1px; background: #374151;"></div>
+          <button type="button" id="btn-download-invoice" class="admin-dropdown-item" style="width: 100%; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: none; border: none; color: #f3f4f6; font-size: 13px; text-align: left; cursor: pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span>Descargar Factura</span>
+          </button>
+          <div style="height: 1px; background: #374151;"></div>
+          <button type="button" id="btn-download-agent" class="admin-dropdown-item" style="width: 100%; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: none; border: none; color: #10b981; font-size: 13px; text-align: left; cursor: pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Descargar Agente</span>
+          </button>
+          <div style="height: 1px; background: #374151;"></div>
+          <button type="button" id="btn-logout" class="admin-dropdown-item" style="width: 100%; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: none; border: none; color: #ef4444; font-size: 13px; text-align: left; cursor: pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Cerrar Sesión</span>
+          </button>
+        </div>
+      </div>
+      <button id="btn-refresh-all" class="btn btn-sm btn-secondary" title="Forzar actualización de miniaturas">
+        <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 4 23 10 17 10"></polyline>
+          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+        </svg>
+        <span>Refrescar</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================================================================= -->
+  <!-- SOS Emergency Global Banner -->
+  <!-- ================================================================= -->
+  <aside id="sos-global-banner" class="sos-global-banner hidden" role="alert" aria-live="assertive">
+    <div class="sos-banner-content">
+      <span class="sos-banner-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" style="color: #ef4444;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </span>
+      <div class="sos-banner-text-group">
+        <span class="sos-banner-label font-bold">ALERTA SOS ACTIVA:</span>
+        <span id="sos-banner-msg" class="sos-banner-msg">Sucursal requiere asistencia inmediata</span>
+      </div>
+      <div class="sos-banner-actions">
+        <button id="btn-sos-takeover" class="btn btn-xs btn-danger font-bold" title="Tomar control interactivo inmediato de la caja">
+          <span>Atender SOS (1-Clic)</span>
+        </button>
+        <button id="btn-sos-clear" class="btn btn-xs btn-outline" title="Descartar alerta de emergencia">
+          <span>Descartar</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================================================================= -->
+  <!-- 3. Main Dashboard Workspace (Two Distinct Tabs) -->
+  <!-- ================================================================= -->
+  <main class="dashboard-main">
+
+    <!-- ============================================================= -->
+    <!-- TAB 1: Supervisión Central (Modo Administrador con miniaturas) -->
+    <!-- ============================================================= -->
+    <div id="view-supervision" class="tab-view hidden">
+      <div class="workspace-toolbar">
+        <div class="toolbar-left">
+          <h2 class="section-heading">Cuadrícula de Supervisión</h2>
+          <span class="section-tag" id="section-tag-branches">Estaciones conectadas en tiempo real</span>
+        </div>
+        <div class="toolbar-right">
+          <div class="filter-group">
+            <button class="filter-btn" data-filter="all">Todas (<span id="filter-all-badge">0</span>)</button>
+            <button class="filter-btn active" data-filter="online">En Línea (<span id="filter-online-badge">0</span>)</button>
+            <button class="filter-btn" data-filter="offline">Desconectadas (<span id="filter-offline-badge">0</span>)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cuadrícula Dinámica de Sucursales -->
+      <section class="branches-grid" id="branches-grid" aria-label="Cuadrícula de Sucursales">
+        <!-- Estado Vacío cuando no hay máquinas conectadas -->
+        <div id="empty-branches-state" class="empty-branches-state" style="display: flex;">
+          <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4.93 19.07A10 10 0 0 1 12 16a10 10 0 0 1 7.07 3.07"></path><path d="M7.76 16.24A6 6 0 0 1 12 14a6 6 0 0 1 4.24 2.24"></path><circle cx="12" cy="11" r="2"></circle><line x1="12" y1="13" x2="12" y2="21"></line></svg></div>
+          <h3 class="empty-title">Esperando Conexión de Estaciones</h3>
+          <p class="empty-subtitle">No hay PCs de sucursal conectadas en este momento.<br>Instale el agente en las computadoras con <strong>VisionDeskSetup.exe</strong> para verlas aquí en tiempo real.</p>
+        </div>
+
+        <!-- Tarjetas semánticas pre-configuradas para las 6 sucursales de Arequipa -->
+              </section>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- TAB 2: Soporte Punto a Punto (RustDesk Style - Sin miniaturas) -->
+    <!-- ============================================================= -->
+    <div id="view-support" class="tab-view active">
+      <div class="support-container">
+        
+        <!-- Columna 1: Tu Estación (Esta Computadora) - Permitir Acceso -->
+        <div class="support-card my-station-card">
+          <div class="support-card-header">
+            <div class="support-icon-badge" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
+            <div style="flex: 1;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h2 class="support-title">Tu Estación</h2>
+                <span id="my-station-status-pill" class="station-badge-live">
+                  <span class="dot"></span>
+                  <span id="my-station-status-text">En Línea</span>
+                </span>
+              </div>
+              <p class="support-subtitle">Permite que un técnico o compañero ingrese a tu equipo</p>
+            </div>
+          </div>
+
+          <!-- Estado: Estación Detectada Automáticamente -->
+          <div id="my-station-detected-banner" class="station-detected-box" style="margin-bottom: 14px; padding: 10px 14px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 8px; display: none; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="display: inline-flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></span>
+              <div>
+                <span style="font-size: 13px; font-weight: 700; color: #34d399;" id="my-station-alias">Esta PC</span>
+                <span style="font-size: 11px; color: var(--text-muted); display: block;">Agente local activo en esta máquina</span>
+              </div>
+            </div>
+            <span style="font-size: 11px; font-weight: 600; color: #34d399; background: rgba(16, 185, 129, 0.2); padding: 3px 8px; border-radius: 4px;">Esta PC</span>
+          </div>
+
+          <!-- Estado: Estación no creada o agente no iniciado en esta PC -->
+          <div id="my-station-not-found-box" class="station-not-found-box" style="margin-bottom: 14px; padding: 14px; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 8px;">
+            <div style="display: flex; align-items: flex-start; gap: 10px;">
+              <span style="display: inline-flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>
+              <div style="flex: 1;">
+                <h4 style="font-size: 13px; font-weight: 700; color: #fca5a5; margin: 0 0 4px 0;">Estación no creada en este equipo</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin: 0 0 10px 0; line-height: 1.4;">
+                  No se detectó el agente VisionDesk ejecutándose en esta computadora. Para que otros puedan conectarse a este equipo, ejecute <strong>VisionDeskAgent.exe</strong> o configure esta PC con <strong>VisionDeskSetup.exe</strong>.
+                </p>
+                <button type="button" id="btn-retry-detect-station" class="btn btn-xs btn-outline" style="border-color: rgba(239, 68, 68, 0.4); color: #fca5a5;" title="Volver a consultar el agente local">
+                  Reintentar Detección
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="station-credential-group">
+            <div class="station-field-header">
+              <span class="station-field-label">Tu ID de Conexión (9 Dígitos):</span>
+              <button type="button" id="btn-copy-my-id" class="btn-copy-chip" title="Copiar ID al portapapeles">
+                <span style="display: inline-flex; align-items: center; gap: 4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copiar ID</span>
+              </button>
+            </div>
+            <div id="my-station-id" class="station-id-huge font-mono">--- --- ---</div>
+
+            <div class="station-field-header" style="margin-top: 10px;">
+              <span class="station-field-label">Contraseña de Acceso:</span>
+              <div style="display: flex; gap: 6px;">
+                <button type="button" id="btn-toggle-my-pwd" class="btn-copy-chip" title="Mostrar u ocultar contraseña">
+                  <span id="toggle-my-pwd-icon" style="display: inline-flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></span> <span id="toggle-my-pwd-text">Ver</span>
+                </button>
+                <button type="button" id="btn-copy-my-pwd" class="btn-copy-chip" title="Copiar Contraseña al portapapeles">
+                  <span style="display: inline-flex; align-items: center; gap: 4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copiar</span>
+                </button>
+              </div>
+            </div>
+            <div id="my-station-pwd-display" class="station-pwd-huge font-mono">••••••••</div>
+          </div>
+
+          <button type="button" id="btn-share-invite" class="btn-share-invite" title="Copiar invitación completa para WhatsApp / Teams">
+            <span>Copiar Invitación para WhatsApp</span>
+          </button>
+
+          <div style="margin-top: 16px; padding: 12px; background: rgba(0,0,0,0.25); border-radius: 8px; font-size: 11px; color: var(--text-muted); line-height: 1.5;">
+            <strong>Acceso Seguro:</strong> Solo comparta su ID y contraseña con personas autorizadas. La pantalla permanece privada y no se transmite captura alguna de 5 segundos.
+          </div>
+        </div>
+
+        <!-- Columna 2: Conectar a Estación Remota + Historial -->
+        <div class="support-card connect-card">
+          <div class="support-card-header">
+            <div class="support-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path></svg></div>
+            <div>
+              <h2 class="support-title">Controlar Estación Remota</h2>
+              <p class="support-subtitle">Ingrese el ID del asociado para conectarse a otra PC</p>
+            </div>
+          </div>
+
+          <form id="support-connect-form" class="support-form" onsubmit="return false;">
+            <div class="form-group">
+              <label for="support-target-input" class="form-label">ID de Máquina (9 Dígitos) o Alias / Sucursal:</label>
+              <div class="input-with-badge">
+                <input type="text" id="support-target-input" class="form-input font-mono" placeholder="Ej: 806 759 833 o computo" autocomplete="off" required>
+                <span id="support-resolve-badge" class="resolve-badge hidden"></span>
+              </div>
+              <small class="form-hint">Escriba el ID numérico de 9 dígitos de la máquina o el alias de la sucursal.</small>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Método de Autenticación:</label>
+              <div class="auth-toggle-group">
+                <button type="button" class="auth-toggle-btn active" data-auth="password">
+                  <span style="display: inline-flex; align-items: center; gap: 4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 2l-2 2m-1.5 1.5L16 7l-1.5-1.5-2 2 1.5 1.5-4 4A6.5 6.5 0 1 0 17 19.5l4-4-1.5-1.5 2-2-1.5-1.5L22 9l-1-7z"></path><circle cx="7.5" cy="16.5" r="1.5"></circle></svg> Contraseña Fija</span>
+                </button>
+                <button type="button" class="auth-toggle-btn" data-auth="otp">
+                  <span style="display: inline-flex; align-items: center; gap: 4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Clave Temporal (OTP)</span>
+                </button>
+                <button type="button" class="auth-toggle-btn" data-auth="prompt">
+                  <span style="display: inline-flex; align-items: center; gap: 4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Autorización en Pantalla</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group" id="support-password-group">
+              <label for="support-password-input" class="form-label" id="support-password-label">Contraseña de la Máquina Remota:</label>
+              <div class="password-input-wrapper">
+                <input type="password" id="support-password-input" class="form-input" placeholder="Ingrese la contraseña configurada en la PC" autocomplete="current-password">
+                <button type="button" id="btn-toggle-support-pwd" class="btn-eye-toggle" title="Mostrar/Ocultar contraseña"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+              </div>
+            </div>
+
+            <div id="support-status-box" class="support-status-box hidden">
+              <div class="support-spinner" id="support-status-spinner"></div>
+              <span id="support-status-msg" class="support-status-msg">Conectando...</span>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" id="btn-support-connect" class="btn btn-primary btn-lg font-bold" style="width: 100%;" title="Conectar sesión">
+                <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
+                <span>Conectar sesión</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Conexiones Recientes -->
+          <div class="recent-connections-box" style="margin-top: 24px;">
+            <h3 class="recent-title">Conexiones Recientes</h3>
+            <div id="recent-connections-list" class="recent-list">
+              <p class="recent-empty">No hay conexiones recientes registradas en este navegador.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- TAB 3: Panel de Moderador (Gestión de Cuentas, VIP y Contraseñas) -->
+    <!-- ============================================================= -->
+    <div id="view-moderator" class="tab-view hidden">
+      <div class="workspace-toolbar">
+        <div class="toolbar-left">
+          <h2 class="section-heading">Gestión de Cuentas y Licencias VIP</h2>
+          <span class="section-tag">Administración central de planes (PRO / VIP / FREE) y contraseñas</span>
+        </div>
+        <div class="toolbar-right">
+          <button type="button" id="tab-mod-refresh-btn" class="btn btn-sm btn-outline" title="Actualizar lista de cuentas">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            <span>Actualizar Lista</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="moderator-tab-card" style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+        <div id="tab-mod-status-alert" class="mod-status-alert hidden" style="margin-bottom: 16px;"></div>
+
+        <div class="mod-users-table-wrapper" style="overflow-x: auto;">
+          <table class="mod-users-table" style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--border-subtle); text-align: left; color: #94a3b8; font-size: 12px;">
+                <th style="padding: 12px;">Cuenta / Usuario</th>
+                <th style="padding: 12px;">Rol</th>
+                <th style="padding: 12px;">Estado Licencia</th>
+                <th style="padding: 12px;">Acción VIP</th>
+                <th style="padding: 12px;">Cambiar Contraseña</th>
+              </tr>
+            </thead>
+            <tbody id="tab-mod-users-tbody">
+              <!-- Cargado dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- 4. Fullscreen / Expanded Live Session Modal Viewer -->
+  <!-- ================================================================= -->
+  <dialog id="session-modal" class="session-modal" aria-labelledby="modal-branch-title" aria-modal="true">
+    <div class="modal-window">
+
+      <!-- Modal Header Bar -->
+      <header class="modal-header" id="session-modal-header">
+        <!-- CABECERA 1 (Superior): Logo VisionDesk [izq] | Ping y Desconectar [der] -->
+        <div class="session-header-row1">
+          <div class="session-brand-badge">
+            <div class="brand-logo" style="width: 28px; height: 28px; min-width: 28px;">
+              <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <span class="session-brand-title">VisionDesk <span class="brand-badge" style="font-size: 9px; padding: 1px 5px;">PRO</span></span>
+          </div>
+
+          <div class="session-row1-actions">
+            <!-- Ping en tiempo real -->
+            <div class="telemetry-chip font-mono session-ping-chip" title="Latencia en tiempo real">
+              <span class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4.93 19.07A10 10 0 0 1 12 16a10 10 0 0 1 7.07 3.07"></path><path d="M7.76 16.24A6 6 0 0 1 12 14a6 6 0 0 1 4.24 2.24"></path><circle cx="12" cy="11" r="2"></circle><line x1="12" y1="13" x2="12" y2="21"></line></svg></span>
+              <span id="modal-latency">-- ms</span>
+            </div>
+
+            <!-- Desconectar -->
+            <button id="modal-close-btn" class="btn btn-danger btn-disconnect" title="Cerrar y terminar sesión">
+              <span class="btn-icon">✕</span>
+              <span>Desconectar</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- CABECERA 2 (Secundaria): Nombre de transmisión | ID | Modo -->
+        <div class="session-header-row2">
+          <div class="session-row2-info">
+            <span class="badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
+            <h2 id="modal-branch-title" class="modal-branch-name">Sucursal</h2>
+            <span id="modal-branch-alias" class="modal-branch-alias font-mono">AQP-CAJA01</span>
+            <span class="modal-meta-sep">•</span>
+            <span class="modal-machine-id font-mono" id="modal-machine-id-container">ID: <strong id="modal-machine-id-val">--- --- ---</strong></span>
+          </div>
+
+          <div id="modal-mode-banner" class="modal-mode-banner mode-observe">
+            <span class="mode-icon" id="modal-mode-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+            <span class="mode-title" id="modal-mode-title">CONTROL</span>
+          </div>
+        </div>
+
+        <!-- TELEMETRÍA DE ESCRITORIO (Oculta estrictamente en móvil <= 768px) -->
+        <div class="session-desktop-extras" id="session-desktop-extras">
+          <div id="modal-link-badge" class="telemetry-chip font-mono link-badge badge-tier-connecting" title="Nivel de transporte de enlace activo (Cascada 3 Niveles)">
+            <span class="link-dot"></span>
+            <span id="modal-link-badge-text" class="link-text">Iniciando...</span>
+          </div>
+          <button id="modal-transport-toggle-btn" class="btn-transport-toggle" title="Alternar entre conexión directa WebRTC P2P y WebSocket Relay" style="display: none;">
+            Forzar P2P
+          </button>
+          <div class="telemetry-chip font-mono" title="Duración de la sesión">
+            <span class="chip-icon">⏱️</span>
+            <span id="modal-timer">00:00:00</span>
+          </div>
+          <div class="telemetry-chip font-mono" title="Tasa de cuadros por segundo">
+            <span class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
+            <span id="modal-fps">0 FPS</span>
+          </div>
+          <button id="modal-fullscreen-btn" class="btn btn-icon btn-secondary" title="Pantalla completa">
+            <span class="icon-expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Central Responsive Viewport & Canvas -->
+      <div class="session-viewport" id="session-viewport">
+        <!-- Floating In-Viewport Zoom Controls -->
+        
+        <!-- Connecting / Buffering Spinner Overlay -->
+        <div id="session-loader" class="session-loader">
+          <div class="spinner"></div>
+          <div id="session-loader-text" class="loader-text">Conectando canal de relay seguro con la sucursal...</div>
+        </div>
+
+        <!-- Central High-Performance Streaming Canvas -->
+        <canvas id="session-canvas" class="session-canvas" width="1920" height="1080" tabindex="0"></canvas>
+      </div>
+
+      <!-- Modal Footer Toolbar: Remote OS Shortcuts & Instructions -->
+      <footer class="modal-footer" id="modal-footer">
+        <div class="footer-instructions" id="footer-instructions">
+          <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span>
+          <span id="modal-instructions-text">Auditoría pasiva activa: mouse y teclado deshabilitados para no interrumpir al cajero.</span>
+        </div>
+
+        <!-- Remote Key Injection Toolbar (Active only in Control Mode) -->
+        <div class="remote-shortcuts-bar" id="remote-shortcuts-bar">
+          <span class="shortcuts-label" style="font-weight: 600; color: #94a3b8; font-size: 11px;">Texto:</span>
+          <button type="button" id="btn-inject-quick-text" class="btn btn-xs btn-shortcut" style="color: #6ee7b7; border-color: rgba(16, 185, 129, 0.45); font-weight: 600;" title="Escribir texto en el campo enfocado de la PC remota">Escribir...</button>
+          <span id="custom-macros-slot"></span>
+          <button type="button" id="btn-add-text-macro" class="btn btn-xs btn-shortcut" style="border-style: dashed; border-color: #10b981; color: #6ee7b7; font-weight: 600;" title="Guardar un texto frecuente para escribir con 1 clic">+ Guardar Texto</button>
+        </div>
+      </footer>
+
+    </div>
+  </dialog>
+
+  <!-- ================================================================= -->
+  <!-- 5. Unified Authentication Dialog (Admin / Usuario) -->
+  <!-- ================================================================= -->
+  <dialog id="admin-login-dialog" class="admin-login-dialog" aria-labelledby="login-title" aria-modal="true">
+    <div class="login-window" style="background: #111827 !important; border: 2px solid #3b82f6 !important; box-shadow: 0 25px 60px rgba(0,0,0,0.95); position: relative; z-index: 10;">
+      <header class="login-header">
+        <div class="login-brand">
+          <span class="login-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
+          <div>
+            <h2 id="login-title" class="login-title">Iniciar Sesión</h2>
+            <p class="login-subtitle">VisionDesk — Acceso Administrador y Usuario</p>
+          </div>
+        </div>
+        <button id="login-close-btn" class="login-close-btn" title="Cerrar ventana">✕</button>
+      </header>
+
+      <form id="admin-login-form" class="login-form" onsubmit="return false;">
+        <div class="login-field-group">
+          <label for="login-username-input" class="login-label">Usuario:</label>
+          <input type="text" id="login-username-input" class="form-input" placeholder="Usuario (admin / usuario / moderador)" autocomplete="username" required>
+        </div>
+
+        <div class="login-field-group">
+          <label for="admin-password-input" class="login-label">Contraseña:</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="admin-password-input" class="form-input" placeholder="Ingrese su contraseña" autocomplete="current-password" required>
+            <button type="button" id="btn-toggle-admin-pwd" class="btn-eye-toggle" title="Mostrar/Ocultar contraseña"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+          </div>
+          <small class="login-hint">Credenciales corporativas de acceso.</small>
+        </div>
+
+        <div id="login-error-msg" class="login-error-msg hidden">
+          <span>Credenciales incorrectas. Verifique sus datos.</span>
+        </div>
+
+        <footer class="login-actions">
+          <button type="button" id="login-cancel-btn" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" id="btn-admin-login-submit" class="btn btn-primary font-bold" style="background: linear-gradient(135deg, #2563eb, #1d4ed8) !important; color: #ffffff !important; border: 1px solid #60a5fa !important; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.6) !important; font-size: 13px !important; padding: 9px 20px !important;">
+            <span>Iniciar Sesión</span>
+          </button>
+        </footer>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- ================================================================= -->
+  <!-- 5b. VisionDesk PRO Commercial Purchase Modal -->
+  <!-- ================================================================= -->
+  <dialog id="pro-purchase-modal" class="pro-purchase-modal" aria-labelledby="pro-modal-title" aria-modal="true">
+    <div class="pro-modal-window" style="background: #111827 !important; border: 2px solid #3b82f6 !important; box-shadow: 0 25px 60px rgba(0,0,0,0.9); border-radius: 12px; padding: 24px; position: relative; z-index: 100; color: #ffffff !important;">
+      <header class="pro-modal-header" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 14px; margin-bottom: 18px;">
+        <div class="pro-modal-brand" style="display: flex; align-items: center; gap: 12px;">
+          <span class="pro-modal-icon" style="color: #60a5fa; display: flex; align-items: center;">
+            <svg viewBox="0 0 24 24" fill="#3b82f6" stroke="#60a5fa" stroke-width="1.5" width="28" height="28">
+              <polygon points="6 3 18 3 22 9 12 22 2 9 6 3"></polygon>
+              <line x1="12" y1="22" x2="7" y2="9"></line>
+              <line x1="12" y1="22" x2="17" y2="9"></line>
+              <line x1="2" y1="9" x2="22" y2="9"></line>
+            </svg>
+          </span>
+          <div>
+            <h2 id="pro-modal-title" class="pro-modal-title" style="color: #ffffff !important; font-size: 20px; font-weight: 800; margin: 0;">VisionDesk PRO</h2>
+            <p class="pro-modal-subtitle" style="color: #94a3b8 !important; font-size: 12px; margin: 2px 0 0 0;">Supervisión Centralizada &amp; Soporte Ilimitado</p>
+          </div>
+        </div>
+        <button id="pro-close-btn" class="login-close-btn" style="color: #9ca3af; background: none; border: none; font-size: 18px; cursor: pointer;" title="Cerrar ventana">✕</button>
+      </header>
+
+      <div class="pro-modal-body" style="margin-bottom: 20px;">
+        <div class="pro-modal-notice" style="background: rgba(30, 58, 138, 0.45) !important; border: 1px solid #3b82f6 !important; border-radius: 8px; padding: 14px 16px; margin-bottom: 16px;">
+          <p class="pro-modal-text" style="color: #ffffff !important; font-size: 14px; line-height: 1.5; margin: 0;">
+            Compra la versión PRO. Contacta con este número <strong style="color: #fde047 !important; font-size: 15px;">904625262</strong> o al correo <strong style="color: #93c5fd !important; font-size: 15px;">atp1847@gmail.com</strong>
+          </p>
+        </div>
+        <div class="pro-modal-features" style="background: rgba(15, 23, 42, 0.75); border-radius: 6px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.06);">
+          <ul class="pro-feature-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; color: #cbd5e1 !important; font-size: 12px;">
+            <li style="display: flex; align-items: center; gap: 8px;"><span style="color: #10b981; font-weight: bold;">✓</span> Supervisión central multi-pantalla en tiempo real</li>
+            <li style="display: flex; align-items: center; gap: 8px;"><span style="color: #10b981; font-weight: bold;">✓</span> Conexión remota directa y control interactivo sin restricciones</li>
+            <li style="display: flex; align-items: center; gap: 8px;"><span style="color: #10b981; font-weight: bold;">✓</span> Facturación corporativa con validez contable</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer class="pro-modal-actions" style="display: flex; flex-direction: column; gap: 10px;">
+        <a href="https://wa.me/51904625262" target="_blank" rel="noopener noreferrer" class="btn btn-success pro-action-btn" id="pro-btn-whatsapp" style="background: #059669; color: #ffffff; text-decoration: none; padding: 11px; text-align: center; border-radius: 6px; font-weight: 700; display: block;">
+          <span>WhatsApp 904625262</span>
+        </a>
+        <a href="mailto:atp1847@gmail.com" class="btn btn-outline pro-action-btn" id="pro-btn-email" style="color: #93c5fd; border: 1px solid #3b82f6; text-decoration: none; padding: 11px; text-align: center; border-radius: 6px; font-weight: 600; display: block;">
+          <span>Email atp1847@gmail.com</span>
+        </a>
+        <button type="button" id="btn-pro-open-login" class="btn btn-primary font-bold pro-action-btn" style="background: #2563eb; color: #ffffff; border: none; padding: 11px; border-radius: 6px; font-weight: 700; cursor: pointer; width: 100%;">
+          <span>Ya tengo una cuenta</span>
+        </button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- ================================================================= -->
+  <!-- 5c. Moderator Licensing & Account Management Modal -->
+  <!-- ================================================================= -->
+  <dialog id="moderator-modal" class="moderator-modal" aria-labelledby="mod-modal-title" aria-modal="true">
+    <div class="moderator-window">
+      <header class="moderator-header">
+        <div class="moderator-brand">
+          <div class="moderator-icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div>
+            <h2 id="mod-modal-title" class="moderator-title">Gestión de Cuentas y Licencias VIP</h2>
+            <p class="moderator-subtitle">Panel de Moderador · Cambiar planes (PRO / VIP / FREE) y contraseñas</p>
+          </div>
+        </div>
+        <button id="mod-close-btn" class="login-close-btn" title="Cerrar ventana">✕</button>
+      </header>
+
+      <div class="moderator-body">
+        <div id="mod-status-alert" class="mod-status-alert hidden"></div>
+
+        <div class="mod-users-table-wrapper">
+          <table class="mod-users-table">
+            <thead>
+              <tr>
+                <th>Cuenta / Usuario</th>
+                <th>Rol</th>
+                <th>Estado Licencia</th>
+                <th>Acción VIP</th>
+                <th>Cambiar Contraseña</th>
+              </tr>
+            </thead>
+            <tbody id="mod-users-tbody">
+              <!-- Dynamically populated from /api/moderator/users -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <footer class="moderator-actions">
+        <button type="button" id="mod-refresh-btn" class="btn btn-sm btn-outline">
+          <span>Actualizar Lista</span>
+        </button>
+        <button type="button" id="mod-done-btn" class="btn btn-sm btn-primary font-bold">
+          <span>Listo</span>
+        </button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- ================================================================= -->
+  <!-- 6. Toast Notification System -->
+  <!-- ================================================================= -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Scripts -->
+  <script src="js/vendor/jspdf.umd.min.js"></script>
+  <script src="js/app.js?v=3.5.0"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch((err) => {
+          console.warn('[PWA] Service Worker registration failed:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
